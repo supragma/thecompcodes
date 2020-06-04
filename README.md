@@ -7,18 +7,21 @@ Things you may want to cover:
 
 * Ruby version
 
+2.7.0
+
 * System dependencies
+
+Docker
+Dockercompose
 
 * Configuration
 
-* Database creation
+* Database creation and initailization
 
-* Database initialization
+sudo docker-compose run web rake db:create db:setup
 
-* How to run the test suite
+* Spin Server
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+sudo docker-compose up --build
 
 * ...

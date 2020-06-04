@@ -18,8 +18,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: db
-  username: postgres
-  password:
+  username: <%= ENV['COMP_CODE_DATABASE_USERNAME'] %>
+  password: <%= ENV['COMP_CODE_DATABASE_PASSWORD'] %>
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -84,5 +84,4 @@ test:
 production:
   <<: *default
   database: comp_code_production
-  username: comp_code
-  password: <%= ENV['COMP_CODE_DATABASE_PASSWORD'] %>
+  host: <%= ENV['COMP_CODE_DATABASE_HOST'] %>
