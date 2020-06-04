@@ -1,27 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Configuration and Setup
 
-* Ruby version
+* ### Requirements:
 
-2.7.0
+  * Ruby version: 2.7.0
+  * Docker and docker compose
 
-* System dependencies
+* ### Database Creation and configuration
 
-Docker
-Dockercompose
+  * Copy .env.template as .env and setup proper value for the respective environment variables.
+  ``` cp .env.template .env ```
 
-* Configuration
 
-* Database creation and initailization
+  * Run db:create and db:setup
+  ``` sudo docker-compose run web rake db:create db:setup```
 
-sudo docker-compose run web rake db:create db:setup
+* ### Spin Server
+  ```sudo docker-compose up --build```
 
-* Spin Server
-
-sudo docker-compose up --build
-
-* ...
