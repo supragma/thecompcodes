@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/ruby:2.7.0
+        environment:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: test
+          CI: "true"
+          CODECOV_TOKEN: bea7e619-4835-4432-834b-cc89a5f4c878
+      - image: postgres:10
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: comp_code_test
+          POSTGRES_PASSWORD: toor
+    steps:
+      - checkout
+
+      - type: cache-restore
+        name: Restore bundle cache
+        key: app-{{ checksum "Gemfile.lock" }}
+
+      - run: bundle install --path vendor/bundle
+
+      - type: cache-save
+        name: Store bundle cache
+        key: app-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run: cp .env.template .env
+
+      - run: gem install rails
+
+      - run:
+          name: Migrate DB
+          command: rails db:migrate
+
+      - run:
+          name: Run Tests
+          command: rails test
