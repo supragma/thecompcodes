@@ -9,7 +9,6 @@ jobs:
           PGUSER: postgres
           RAILS_ENV: test
           CI: "true"
-          CODECOV_TOKEN: bea7e619-4835-4432-834b-cc89a5f4c878
       - image: postgres:10
         environment:
           POSTGRES_USER: postgres
