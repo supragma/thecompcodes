@@ -14,5 +14,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
-# CMD ["cd", "/myapp/src"]
 CMD ["rails", "server", "-b", "0.0.0.0"]
