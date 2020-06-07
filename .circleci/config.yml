@@ -13,7 +13,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: comp_code_test
-          POSTGRES_PASSWORD: toor
+          POSTGRES_PASSWORD: b0hka32fe5@#rhfG*sp1
     steps:
       - checkout
 

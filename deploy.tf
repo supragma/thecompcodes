@@ -1,5 +1,9 @@
 
 
+variable "POSTGRES_USER" { type  = string }
+variable "POSTGRES_PASSWORD" { type  = string }
+variable "POSTGRES_DB" { type  = string }
+
 resource "docker_image" "db" {
   name = "postgres:10"
   keep_locally = false
@@ -25,9 +29,9 @@ resource "docker_container" "db" {
   name = "comp_code_postgres"
   restart = "always"
   env = [
-    "POSTGRES_USER=postgres",
-    "POSTGRES_PASSWORD=toor",
-    "POSTGRES_DB=comp_code"
+    "POSTGRES_USER=${var.POSTGRES_USER}",
+    "POSTGRES_PASSWORD=${var.POSTGRES_PASSWORD}",
+    "POSTGRES_DB=${var.POSTGRES_DB}"
   ]
   ports {
     internal = 5432
