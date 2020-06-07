@@ -1,3 +1,6 @@
-POSTGRES_USER = "postgres"
-POSTGRES_PASSWORD = "cd@9(87hka32fG*sp1"
-POSTGRES_DB = "comp_code"
+HOST_PATH = "/"
+
+/* db */
+POSTGRES_USER = ""
+POSTGRES_PASSWORD = ""
+POSTGRES_DB = ""

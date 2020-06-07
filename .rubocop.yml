@@ -16,14 +16,17 @@ Layout/LineLength:
 Metrics/MethodLength:
   Max: 35
 
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: true
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
 Metrics/AbcSize:
    Enabled: false
 
 Metrics/BlockLength:
   Max: 70
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: false
 
 Layout/SpaceAroundMethodCallOperator:
   Enabled: false

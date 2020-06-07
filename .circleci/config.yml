@@ -13,7 +13,6 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: comp_code_test
-          POSTGRES_PASSWORD: b0hka32fe5@#rhfG*sp1
     steps:
       - checkout
 
@@ -30,8 +29,6 @@ jobs:
           - vendor/bundle
 
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run: cp .env.template .env
 
       - run: gem install rails
 

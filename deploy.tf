@@ -1,27 +1,11 @@
 
-
-variable "POSTGRES_USER" { type  = string }
-variable "POSTGRES_PASSWORD" { type  = string }
-variable "POSTGRES_DB" { type  = string }
-
 resource "docker_image" "db" {
   name = "postgres:10"
   keep_locally = false
 }
 
-resource "docker_container" "comp_code" {
-  image = "comp_code:latest"
-  name  = "comp_code"
-  restart = "always"
-  volumes {
-    container_path  = "/myapp"
-    host_path = "/Users/belwasetech/projects/supragma/comp.code"
-    read_only = false
-  }
-  ports {
-    internal = 3000
-    external = 3000
-  }
+resource "docker_network" "private_network" {
+  name = "comp_code_network"
 }
 
 resource "docker_container" "db" {
@@ -33,9 +17,31 @@ resource "docker_container" "db" {
     "POSTGRES_PASSWORD=${var.POSTGRES_PASSWORD}",
     "POSTGRES_DB=${var.POSTGRES_DB}"
   ]
+  network_mode = "bridge"
+  networks_advanced {
+    name = docker_network.private_network.name
+  }
   ports {
     internal = 5432
-    external = 5434
+    external = 5432
   }
 }
 
+resource "docker_container" "comp_code" {
+  image = "comp_code:latest"
+  name  = "comp_code"
+  restart = "always"
+  volumes {
+    container_path  = "/myapp"
+    host_path = var.HOST_PATH
+    read_only = false
+  }
+  network_mode = "bridge"
+  networks_advanced {
+    name = docker_network.private_network.name
+  }
+  ports {
+    internal = 3000
+    external = 3000
+  }
+}
