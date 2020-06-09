@@ -40,3 +40,7 @@ gem 'simplecov', '0.18.5', require: false, group: :test
 
 # For code styling
 gem 'rubocop', '0.85.0', require: false
+
+gem "activesupport", "6.0.3.1"
+gem "actionview", "6.0.2.2"
+gem "actionpack", "6.0.3.1"
