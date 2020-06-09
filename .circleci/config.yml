@@ -28,7 +28,6 @@ jobs:
       RAILS_ENV: test
     steps:
       - checkout
-      - ruby/install-deps
       - run:
           name: Install gems
           command: bundle install
