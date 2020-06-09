@@ -10,6 +10,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run:
+         name: Install gems
+         command: bundle install
   test:
     parallelism: 3
     docker:
