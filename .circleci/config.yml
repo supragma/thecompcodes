@@ -1,1 +1,55 @@
+version: 2.1
 
+orbs:
+  ruby: circleci/ruby@1.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.0
+    steps:
+      - checkout
+      - ruby/install-deps
+  test:
+    parallelism: 2
+    docker:
+      - image: circleci/ruby:2.7.0
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: comp_code
+          POSTGRES_DB: comp_code_db
+          POSTGRES_PASSWORD: K6fo+U9sTaBpMqn
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: comp_code
+      PGPASSWORD: K6fo+U9sTaBpMqn
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Install gems
+          command: bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database cration
+          command: bundle exec rails db:create
+      - run:
+          name: Database migration
+          command: bundle exec rails db:migrate
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      - run:
+          name: Running tests
+          command: bundle exec rails test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
