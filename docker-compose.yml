@@ -22,3 +22,14 @@ services:
     depends_on:
       - db
     env_file: .env
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      -  ./config/nginx:/etc/nginx/conf.d
+    links:
+      - "web:web"
+    depends_on:
+      - web

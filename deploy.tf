@@ -4,6 +4,11 @@ resource "docker_image" "db" {
   keep_locally = false
 }
 
+resource "docker_image" "nginx" {
+  name = "nginx:latest"
+  keep_locally = false
+}
+
 resource "docker_network" "private_network" {
   name = "comp_code_network"
 }
@@ -26,6 +31,21 @@ resource "docker_container" "db" {
     external = 5432
   }
 }
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.latest
+  name  = "comp_code_nginx"
+  restart = "always"
+  network_mode = "bridge"
+  networks_advanced {
+    name = docker_network.private_network.name
+  }
+  ports {
+    internal = 80
+    external = 80
+  }
+}
+
 
 resource "docker_container" "comp_code" {
   image = "comp_code:latest"
