@@ -1,41 +1,56 @@
-version: 2
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+
 jobs:
   build:
-    working_directory: ~/app
     docker:
-      - image: circleci/ruby:2.7.0
-        environment:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
-          CI: "true"
-      - image: postgres:10
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: comp_code_test
+      - image: cimg/ruby:2.7-node
     steps:
       - checkout
-
-      - type: cache-restore
-        name: Restore bundle cache
-        key: app-{{ checksum "Gemfile.lock" }}
-
-      - run: bundle install --path vendor/bundle
-
-      - type: cache-save
-        name: Store bundle cache
-        key: app-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
-
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run: gem install rails
-
+      - ruby/install-deps
+      # Store bundle cache
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:2.7-node
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: comp_code
+          POSTGRES_DB: comp_code_db
+          POSTGRES_PASSWORD: K6fo+U9sTaBpMqn
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: comp_code
+      PGPASSWORD: K6fo+U9sTaBpMqn
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
       - run:
-          name: Migrate DB
-          command: rails db:migrate
-
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: Run Tests
-          command: rails test
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      - ruby/rspec-test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
