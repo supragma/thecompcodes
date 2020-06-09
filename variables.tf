@@ -8,10 +8,10 @@ variable "region_zone" {
 
 variable "project_name" {
   description = "Comp code project name"
-  default = "comp-code"
+  default     = "comp-code"
 }
 
-variable "POSTGRES_USER" { type  = string }
-variable "POSTGRES_PASSWORD" { type  = string }
-variable "POSTGRES_DB" { type  = string }
-variable "HOST_PATH" { type  = string }
+variable "POSTGRES_USER" { type = string }
+variable "POSTGRES_PASSWORD" { type = string }
+variable "POSTGRES_DB" { type = string }
+variable "HOST_PATH" { type = string }
