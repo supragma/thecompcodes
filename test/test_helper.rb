@@ -11,10 +11,4 @@ if ENV['CI'] == 'true'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
-module Test
-  class ActiveSupport
-    class TestCase
-
-    end
-  end
-end
+ActiveSupport::TestCase.test_order = :random
