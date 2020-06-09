@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '6.0.2'
+gem 'rails', '6.0.3.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '0.18'
 # Use Puma as the app server
@@ -42,5 +42,5 @@ gem 'simplecov', '0.18.5', require: false, group: :test
 gem 'rubocop', '0.85.0', require: false
 
 gem "activesupport", "6.0.3.1"
-gem "actionview", "6.0.2.2"
+gem "actionview", "6.0.3.1"
 gem "actionpack", "6.0.3.1"
