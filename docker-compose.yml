@@ -27,8 +27,6 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
-    volumes:
-      -  ./config/nginx:/etc/nginx/conf.d
     links:
       - "web:web"
     depends_on:

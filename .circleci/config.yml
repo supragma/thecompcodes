@@ -20,7 +20,7 @@ default_config: &default_config
         POSTGRES_HOST: localhost
         POSTGRES_DB: comp_code_test
         POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: afef23uf923!329
+        POSTGRES_HOST_AUTH_METHOD: trust
  
   working_directory: *working_directory
   

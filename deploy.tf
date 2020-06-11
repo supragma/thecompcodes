@@ -37,12 +37,22 @@ resource "docker_container" "nginx" {
   name         = "comp_code_nginx"
   restart      = "always"
   network_mode = "bridge"
+  volumes {
+    container_path  = "/etc/nginx/conf.d"
+    host_path = "${var.HOST_PATH}/config/nginx"
+    read_only = false
+  }
+  volumes {
+    container_path  = "/etc/certs"
+    host_path = "${var.HOST_PATH}/config/nginx/certs"
+    read_only = false
+  }
   networks_advanced {
     name = docker_network.private_network.name
   }
   ports {
-    internal = 80
-    external = 80
+    internal = 443
+    external = 443
   }
 }
 
