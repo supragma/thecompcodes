@@ -30,14 +30,9 @@ set_environment: &set_environment
     command: |
       cd && touch $BASH_ENV
       cd ~/app/
-
 jobs:
-  build:
-    <<: *default_config
-    steps:
-      - checkout
-
-  test:
+  
+  build_test:
     <<: *default_config
     steps:
       - checkout
@@ -71,11 +66,29 @@ jobs:
           command: bundle exec rails test
 
 
+  deploy:
+    docker:
+      - image: circleci/ruby:2.7.0
+    
+    working_directory: *working_directory
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/app
+      - add_ssh_keys:
+          fingerprints:
+            - $FINGER_PRINT
+      - run:
+          name: Deploy
+          command: |
+            ls .circleci
+            chmod +x .circleci/*.sh
+            ./.circleci/deploy.sh ${CIRCLE_BRANCH}
 workflows:
   version: 2
-  build_and_test:
+  build_and_deploy:
     jobs:
-      - build:
+      - build_test:
           filters:
             branches:
               only:
@@ -83,10 +96,11 @@ workflows:
                 - stage
                 - master
                 - f/deploy
+                - f/deploy-test
 
-      - test:
+      - deploy:
           requires:
-            - build
+            - build_test
           filters:
             branches:
               only:
@@ -94,3 +108,4 @@ workflows:
                 - stage
                 - master
                 - f/deploy
+                - f/deploy-test
