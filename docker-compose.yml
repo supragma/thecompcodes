@@ -27,6 +27,7 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+      - "443:443"
     links:
       - "web:web"
     depends_on:

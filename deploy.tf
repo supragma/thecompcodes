@@ -51,6 +51,10 @@ resource "docker_container" "nginx" {
     name = docker_network.private_network.name
   }
   ports {
+    internal = 80
+    external = 80
+  }
+  ports {
     internal = 443
     external = 443
   }
