@@ -10,12 +10,10 @@ then
 	sed -i '/^RAILS_ENV/s/=.*/="production"/' terraform.tfvars
 elif [[ $1 == "stage" ]]
 then
-	export SECRET_KEY_BASE=$(rake secret)
 	sed -i '/^RAILS_ENV/s/=.*/="stage"/' terraform.tfvars
 else
 	sed -i '/^RAILS_ENV/s/=.*/="development"/' terraform.tfvars
 fi
-
 
 SECRET_KEY_BASE=$(gcloud secrets versions access "latest" --secret="DEPLOY_SECRET")
 DB_HOST=$(gcloud secrets versions access "latest" --secret="DB_HOST")
