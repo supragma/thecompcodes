@@ -1,4 +1,4 @@
-HOST_PATH = "/"
+HOST_PATH = "/home/{user}/comp.code"
 
 /* db */
 POSTGRES_USER = ""

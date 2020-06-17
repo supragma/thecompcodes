@@ -1,26 +1,51 @@
 version: 2
+references:
+
+working_directory: &working_directory
+  ~/app
+
+default_config: &default_config
+  docker:
+    - image: circleci/ruby:2.7.0
+      environment:
+        BUNDLE_JOBS: "3"
+        BUNDLE_RETRY: "3"
+        DB_HOST: localhost
+        DB_NAME: comp_code_test
+        DB_USERNAME: postgres
+        RAILS_ENV: test
+
+    - image: circleci/postgres:10
+      environment:
+        POSTGRES_HOST: localhost
+        POSTGRES_DB: comp_code_test
+        POSTGRES_USER: postgres
+        POSTGRES_HOST_AUTH_METHOD: trust
+ 
+  working_directory: *working_directory
+  
+set_environment: &set_environment
+  run:
+    name: set environment
+    command: |
+      cd && touch $BASH_ENV
+      cd ~/app/
 jobs:
-  build:
-    working_directory: ~/app
-    docker:
-      - image: circleci/ruby:2.7.0
-        environment:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
-          CI: "true"
-      - image: postgres:10
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: comp_code_test
+  
+  build_test:
+    <<: *default_config
     steps:
       - checkout
+      # - setup_remote_docker
+      - *set_environment
 
       - type: cache-restore
         name: Restore bundle cache
         key: app-{{ checksum "Gemfile.lock" }}
 
-      - run: bundle install --path vendor/bundle
+      - run: 
+          name: Install Gems
+          command: bundle install --path vendor/bundle
 
       - type: cache-save
         name: Store bundle cache
@@ -30,12 +55,57 @@ jobs:
 
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: gem install rails
-
       - run:
-          name: Migrate DB
-          command: rails db:migrate
-
+          name: Database creation
+          command: bundle exec rails db:create
       - run:
-          name: Run Tests
-          command: rails test
+          name: Database migration
+          command: bundle exec rails db:migrate
+      - run:
+          name: Running tests
+          command: bundle exec rails test
+
+
+  deploy:
+    docker:
+      - image: circleci/ruby:2.7.0
+    
+    working_directory: *working_directory
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/app
+      - add_ssh_keys:
+          fingerprints:
+            - $FINGER_PRINT
+      - run:
+          name: Deploy
+          command: |
+            ls .circleci
+            chmod +x .circleci/*.sh
+            ./.circleci/deploy.sh ${CIRCLE_BRANCH}
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_test:
+          filters:
+            branches:
+              only:
+                - dev
+                - stage
+                - master
+                - f/deploy
+                - f/deploy-test
+
+      - deploy:
+          requires:
+            - build_test
+          filters:
+            branches:
+              only:
+                - dev
+                - stage
+                - master
+                - f/deploy
+                - f/deploy-test
