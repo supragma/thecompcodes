@@ -8,9 +8,6 @@ cp terraform.tfvars.template terraform.tfvars
 if [[ $1 == "master" ]]
 then
 	sed -i '/^RAILS_ENV/s/=.*/="production"/' terraform.tfvars
-elif [[ $1 == "stage" ]]
-then
-	sed -i '/^RAILS_ENV/s/=.*/="stage"/' terraform.tfvars
 else
 	sed -i '/^RAILS_ENV/s/=.*/="development"/' terraform.tfvars
 fi
