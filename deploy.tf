@@ -65,6 +65,15 @@ resource "docker_container" "comp_code" {
   image   = "comp_code:latest"
   name    = "comp_code"
   restart = "always"
+  env = [
+    "RAILS_ENV=${var.RAILS_ENV}",
+    "SECRET_KEY_BASE=${var.SECRET_KEY_BASE}",
+    "DB_HOST=${var.POSTGRES_HOST}",
+    "DB_USERNAME=${var.POSTGRES_USER}",
+    "DB_PASSWORD=${var.POSTGRES_PASSWORD}",
+    "DB_NAME=${var.POSTGRES_DB}"
+    
+  ]
   volumes {
     container_path = "/myapp"
     host_path      = var.HOST_PATH

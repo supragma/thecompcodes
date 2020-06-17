@@ -1,6 +1,9 @@
 HOST_PATH = "/home/{user}/comp.code"
+RAILS_ENV = "development"
+SECRET_KEY_BASE = "secretkey"
 
 /* db */
+POSTGRES_HOST = "comp_code_postgres"
 POSTGRES_USER = ""
 POSTGRES_PASSWORD = ""
 POSTGRES_DB = ""

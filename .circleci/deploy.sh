@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Later we need to replace ip with domain names
-
 if [ $1 == "master" ]
 then
 	echo "Deploying to $1"
