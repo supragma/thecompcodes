@@ -17,7 +17,7 @@ else
 fi
 
 
-SECRET_KEY_BASE=$(rake secret)
+SECRET_KEY_BASE=$(gcloud secrets versions access "latest" --secret="DEPLOY_SECRET")
 DB_HOST=$(gcloud secrets versions access "latest" --secret="DB_HOST")
 DB_NAME=$(gcloud secrets versions access "latest" --secret="DB_NAME")
 DB_USERNAME=$(gcloud secrets versions access "latest" --secret="DB_USERNAME")
