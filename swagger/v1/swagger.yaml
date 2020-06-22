@@ -1,0 +1,490 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/activity":
+    post:
+      summary: Creates a new activity
+      tags:
+      - Activity
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                description:
+                  type: string
+              required: []
+    get:
+      summary: Gets an user activities
+      tags:
+      - Activity
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/message":
+    post:
+      summary: Creates a new message
+      tags:
+      - Message
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                from:
+                  type: integer
+                to:
+                  type: integer
+              required: []
+    get:
+      summary: Gets an user messages
+      tags:
+      - Activity
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/report":
+    post:
+      summary: Creates a new report
+      tags:
+      - Reporting
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required: []
+    get:
+      summary: Gets user reports
+      tags:
+      - Reporting
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/request":
+    post:
+      summary: Creates a new request
+      tags:
+      - Request
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+              required: []
+    get:
+      summary: Gets requests of that user
+      tags:
+      - Request
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/request/count":
+    get:
+      summary: Gets count of total request of that user
+      tags:
+      - Request
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/request/{id}/user":
+    post:
+      summary: Assign request to a user
+      tags:
+      - Request
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: int
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+              required: []
+    get:
+      summary: Gets requests users
+      tags:
+      - Request
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/request/{id}/comment":
+    post:
+      summary: Post comment to a request
+      tags:
+      - Request
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: int
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+              required: []
+    get:
+      summary: Gets requests comment
+      tags:
+      - Request
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/request/{id}/document":
+    post:
+      summary: Attach document to a request
+      tags:
+      - Request
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: int
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: file
+              required: []
+  "/api/v1/request/{id}/estimate":
+    post:
+      summary: Update estimate
+      tags:
+      - Request
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: int
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+              required: []
+    get:
+      summary: Gets requests estimates
+      tags:
+      - Request
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/request/{id}/estimate/{estimate_id}/invoice":
+    get:
+      summary: Generate request estimate invoice
+      tags:
+      - Request
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/subscription":
+    post:
+      summary: Creates a new subscription
+      tags:
+      - Subscription
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                description:
+                  type: string
+              required: []
+    get:
+      summary: Gets an user subscription history
+      tags:
+      - Subscription
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/subscription/buy":
+    post:
+      summary: Buy/Upgrade a subscription
+      tags:
+      - Subscription
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription_id:
+                  type: string
+                user_id:
+                  type: integer
+                upgrade:
+                  type: boolean
+              required: []
+  "/api/v1/users":
+    post:
+      summary: Creates a new user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                type:
+                  type: string
+              required: []
+    put:
+      summary: Update user profile
+      tags:
+      - User
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+              required: []
+    get:
+      summary: Gets a user profile
+      tags:
+      - User
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/users/auth/login":
+    post:
+      summary: Logins a user and returns token
+      tags:
+      - User
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required: []
+  "/api/v1/users/auth/password-reset":
+    post:
+      summary: Send reset password token
+      tags:
+      - User
+      responses:
+        '200':
+          description: ok
+          content: {}
+    put:
+      summary: Reset password using token
+      tags:
+      - User
+      parameters: []
+      responses:
+        '200':
+          description: ok
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                password:
+                  type: string
+              required: []
+  "/api/v1/users/role":
+    post:
+      summary: Assign a role to user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                user_id:
+                  type: integer
+              required: []
+    get:
+      summary: List user roles
+      tags:
+      - User
+      responses:
+        '200':
+          description: ok
+          content: {}
+  "/api/v1/workflow":
+    post:
+      summary: Creates a new workflow
+      tags:
+      - WorkFlow
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                description:
+                  type: string
+                request_id:
+                  type: string
+              required: []
+    get:
+      summary: Gets user workflows
+      tags:
+      - WorkFlow
+      responses:
+        '200':
+          description: ok
+          content: {}
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

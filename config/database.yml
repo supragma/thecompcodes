@@ -83,4 +83,3 @@ test:
 #
 production:
   <<: *default
-  host: <%= ENV['COMP_CODE_DATABASE_HOST'] %>
