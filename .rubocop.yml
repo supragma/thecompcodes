@@ -4,6 +4,11 @@ AllCops:
     - Berksfile
     - recipes/basic.rb
     - attributes/*.rb
+    - spec/**/*
+    - db/*
+    - db/**/*
+    - config/initializers/*
+    - test/test_helper.rb
 
 # Customize rules
 

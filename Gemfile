@@ -40,6 +40,22 @@ gem 'simplecov', '0.18.5', require: false, group: :test
 # For code styling
 gem 'rubocop', '0.85.0', require: false
 
-gem "activesupport", "6.0.3.1"
-gem "actionview", "6.0.3.1"
-gem "actionpack", "6.0.3.1"
+gem 'actionpack', '6.0.3.1'
+gem 'actionview', '6.0.3.1'
+gem 'activesupport', '6.0.3.1'
+
+group :development, :test do
+  gem 'database_cleaner', '1.8.5'
+  gem 'factory_bot_rails', '6.0.0'
+  gem 'faker', '2.12.0'
+  gem 'rspec-rails', '3.9.1'
+  gem 'rswag', '2.3.1'
+  gem 'shoulda-matchers', '4.3.0'
+end
+
+gem 'devise', '4.7.2'
+gem 'jwt', '2.2.1'
+gem 'simple_command', '0.1.0'
+
+gem 'active_model_serializers', '0.10.10'
+gem 'rack-cors', '1.1.1'
