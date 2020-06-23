@@ -7,7 +7,8 @@ module Api
       before_action :set_user, only: %i[show update destroy]
 
       def index
-        puts Rails.configuration.database_configuration['development']
+        # puts Rails.configuration.database_configuration['development']
+        # puts Rails.application.class.parent_name
         @users = User.all
         json_response(@users, :ok)
       end
@@ -26,12 +27,29 @@ module Api
         end
       end
 
+
+      def reset_pw_post
+        @user = User.find_by(pw_reset_post_params)
+        if @user
+          UserNotifierMailer.send_pw_reset_email(@user).deliver
+          json_response('sent email')
+        else
+          json_response('invalid email')
+        end
+      end
+
       private
 
       def user_params
         params.permit(
           :email,
           :password
+        )
+      end
+
+      def pw_reset_post_params
+        params.permit(
+          :email
         )
       end
 

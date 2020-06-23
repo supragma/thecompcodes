@@ -2,6 +2,6 @@
 
 # app mailer
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@compcode.com'
+  default from: 'admin@comp.codes'
   layout 'mailer'
 end

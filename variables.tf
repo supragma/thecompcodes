@@ -18,3 +18,4 @@ variable "POSTGRES_PASSWORD" { type = string }
 variable "POSTGRES_DB" { type = string }
 variable "HOST_PATH" { type = string }
 variable "RAILS_ENV" { type = string }
+variable "SENDGRID_API_KEY" { type = string }

@@ -7,3 +7,5 @@ POSTGRES_HOST = "comp_code_postgres"
 POSTGRES_USER = ""
 POSTGRES_PASSWORD = ""
 POSTGRES_DB = ""
+
+SENDGRID_API_KEY = ""

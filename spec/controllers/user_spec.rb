@@ -1,53 +1,84 @@
 require 'rails_helper'
 
 RSpec.describe 'user API', type: :request do
-  # initialize test data 
-  let!(:users) { create_list(:user, 10) }
-  let(:user_id) { users.first.id }
 
-  describe 'POST /users' do
-    let(:valid_attributes) { { email: 'test@gmail.com', password: '12345@' } }
+  describe 'POST /api/v1/users/', type: :request do
+      let(:user)            { User.last }
+      let(:failed_response) { 422 }
 
-    context 'valid request' do
-      before { post '/api/v1/users', params: valid_attributes }
-      it 'creates an user' do
-        expect(response).to have_http_status(201)
-        body = JSON.parse(response.body)
-        expect(body['message']).to eq('User created successfully')
+      describe 'POST create' do
+        let(:url)                   { '/api/v1/users/' }
+        let(:email)                 { 'test@test.com' }
+        let(:password)              { '12345678' }
+        let(:params) do
+          {
+              email: email,
+              password: password
+          }
+        end
+
+        it 'returns a successful response' do
+          post url, params: params, as: :json
+          expect(response).to have_http_status(:success)
+          expect(response).to have_http_status(201)
+          body = JSON.parse(response.body)
+          expect(body['message']).to eq('User created successfully')
+
+        end
+
+        it 'creates the user' do
+          expect {
+            post url, params: params, as: :json
+          }.to change(User, :count).by(1)
+        end
+
+
+        context 'when the email is not correct' do
+          let(:email) { 'invalid_email' }
+
+          it 'does not create a user' do
+            expect {
+              post url, params: params, as: :json
+            }.not_to change { User.count }
+          end
+
+          it 'does not return a successful response' do
+            post url, params: params, as: :json
+
+            expect(response.status).to eq(400)
+          end
+        end
       end
-    end
-
-    context 'invalid request' do
-      before { post '/api/v1/users', params: { email: 'test1@gmail.com', password: '12345' } }
-      it 'validation error' do
-        expect(response).to have_http_status(400)
-        expect(response.body)
-          .to match('{"password":["is too short (minimum is 6 characters)"]}')
-      end
-    end
   end
 
-  describe 'GET /users' do
-    before { get '/api/v1/users' }
+  describe 'GET api/v1/users/', type: :request do
+    let(:url)  { '/api/v1/users/' }
+    # let(:user) { create(:user) }
+    let!(:users) { create_list(:user, 10) }
+    let(:user) { users.first }
 
-    it 'check users exists and status code 200' do
-      expect(response.body).not_to be_empty
+    it 'returns success' do
+      get url, headers: auth_headers, as: :json
+      expect(response).to have_http_status(:success)
+    end
+
+    it "returns the logged in user's data" do
+      get url, headers: auth_headers
       expect(response).to have_http_status(200)
-      body = JSON.parse(response.body)
-      expect(body.size).to be 10
+      expect(json.size).to be 10
+      expect(json[0]['email']).to eq user.email
     end
   end
 
-  describe 'GET /users/:id' do
-    before { get "/api/v1/users/#{user_id}" }
+  describe 'GET api/v1/users/:id', type: :request do
+    let(:user) { create(:user) }
 
-    it 'check users exists and status code 200' do
-      expect(response.body).not_to be_empty
-      expect(response).to have_http_status(200)
-      body = JSON.parse(response.body)
-      expect(body['id']).to eq(user_id)
+    it 'returns success' do
+      get "/api/v1/users/#{user.id}", headers: auth_headers, as: :json
+      expect(response).to have_http_status(:success)
+      expect(json["id"]).to eq user.id
+      expect(json["email"]).to eq user.email
     end
   end
-
 
 end

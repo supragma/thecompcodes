@@ -48,13 +48,17 @@ group :development, :test do
   gem 'database_cleaner', '1.8.5'
   gem 'factory_bot_rails', '6.0.0'
   gem 'faker', '2.12.0'
+  gem 'knock'
   gem 'rspec-rails', '3.9.1'
   gem 'rswag', '2.3.1'
   gem 'shoulda-matchers', '4.3.0'
+  gem 'webmock', '3.7'
 end
 
+gem 'pundit', '2.1'
+
 gem 'devise', '4.7.2'
-gem 'jwt', '2.2.1'
+gem 'jwt', '1.5.6'
 gem 'simple_command', '0.1.0'
 
 gem 'active_model_serializers', '0.10.10'
