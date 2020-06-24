@@ -63,3 +63,6 @@ gem 'simple_command', '0.1.0'
 
 gem 'active_model_serializers', '0.10.10'
 gem 'rack-cors', '1.1.1'
+
+gem 'bcrypt-ruby', '3.1.5'
+gem 'sendgrid-actionmailer', '3.0.2'

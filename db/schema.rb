@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_053423) do
+ActiveRecord::Schema.define(version: 2020_06_24_074948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "password_resets", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "token"
+    t.datetime "token_expiration"
+    t.boolean "is_used", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "requests", force: :cascade do |t|
     t.string "name"

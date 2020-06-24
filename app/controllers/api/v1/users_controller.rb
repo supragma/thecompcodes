@@ -27,14 +27,14 @@ module Api
         end
       end
 
-
       def reset_pw_post
         @user = User.find_by(pw_reset_post_params)
         if @user
-          UserNotifierMailer.send_pw_reset_email(@user).deliver
-          json_response('sent email')
+          @password_reset = PasswordReset.create({ user: @user })
+          UserNotifierMailer.pass_reset_email(@password_reset).deliver
+          json_response({ message: 'PasswordReset Link Sent' })
         else
-          json_response('invalid email')
+          json_response({ message: 'Invalid Email' })
         end
       end
 

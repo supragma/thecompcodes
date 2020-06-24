@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
+require 'sendgrid-ruby'
+
 class UserNotifierMailer < ApplicationMailer
   default from: 'admin@comp.codes'
 
-  def send_pw_reset_email(user)
-    @user = user
-    mail(to: @user.email,
-         subject: 'Password Reset For #{Rails.application.class.parent_name}')
+  def pass_reset_email(reset_obj)
+    @reset_obj = reset_obj
+    mail(
+      to: @reset_obj.user.email,
+      subject: 'CompCodes Password Reset',
+      # from: ENV['FROM_EMAIL'],
+      custom_args: {
+        id: '.'
+      }
+    )
   end
 end
