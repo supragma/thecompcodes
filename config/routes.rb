@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
       resources :requests, only: [:index]
       resources :users
-
+      resources :workflows, only: %i[index create update show destroy]
       # resource :activity
     end
   end
