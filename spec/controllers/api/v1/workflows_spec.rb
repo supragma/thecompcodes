@@ -4,12 +4,10 @@ require 'rails_helper'
 
 describe 'Workflow API', type: :request do
   let(:user) { create(:user) }
-  let(:jwt_secret) { Rails.application.secrets.secret_key_base }
-  let(:jwt_token) { JWT.encode({ user_id: user.id }, jwt_secret) }
   let(:request) { create(:request) }
   let(:workflow_status) { 'active' }
   let(:workflow) { create(:workflow, user: user, request: request, status: 'active') }
-  let(:workflow_resposnse) do
+  let(:workflow_response) do
     {
       id: workflow.id,
       status: workflow.status,
@@ -20,15 +18,9 @@ describe 'Workflow API', type: :request do
     }.with_indifferent_access
   end
 
-  let(:headers) do
-    {
-      'Authorization' => "Bearer #{jwt_token}"
-    }
-  end
-
   describe 'Fetch workflows: GET /api/v1/workflows' do
     subject(:fetch_workflows) do
-      get api_v1_workflows_path, headers: headers
+      get api_v1_workflows_path, headers: valid_header(user)
     end
 
     context 'when there is no workflow' do
@@ -43,7 +35,7 @@ describe 'Workflow API', type: :request do
     context 'when workflow is present' do
       let(:response_body) do
         [
-          workflow_resposnse
+          workflow_response
         ]
       end
 
@@ -60,7 +52,7 @@ describe 'Workflow API', type: :request do
 
   describe 'Get workflow: Get /api/v1/workflows/<id>' do
     subject(:get_workflow) do
-      get api_v1_workflow_path(id), headers: headers
+      get api_v1_workflow_path(id), headers: valid_header(user)
     end
 
     context 'when workflow not found' do
@@ -73,18 +65,18 @@ describe 'Workflow API', type: :request do
 
     context 'when workflow is present' do
       let(:id) { workflow.id }
-      
+
       it 'returns workflow object' do
         get_workflow
         expect(response.status).to eql(200)
-        expect(JSON.parse(response.body)).to eql(workflow_resposnse)
+        expect(JSON.parse(response.body)).to eql(workflow_response)
       end
     end
   end
 
   describe 'Update workflow: put /api/v1/workflows/<id>' do
     subject(:update_workflow) do
-      put  api_v1_workflow_path(id: id, workflow: { status: 'inactive' }), headers: headers
+      put  api_v1_workflow_path(id: id, workflow: { status: 'inactive' }), headers: valid_header(user)
     end
 
     context 'when workflow not found' do
@@ -98,40 +90,58 @@ describe 'Workflow API', type: :request do
     context 'when workflow is present' do
       let(:id) { workflow.id }
       let(:workflow_status) { 'inactive' }
-      
+
       it 'returns workflow object' do
         update_workflow
         expect(response.status).to eql(200)
-        expect(JSON.parse(response.body)).to eql(workflow_resposnse)
+        expect(JSON.parse(response.body)).to eql(workflow_response)
       end
     end
   end
 
   describe 'Create workflow: post /api/v1/workflows' do
-    let(:params) do 
+    let(:request_id) { request.id }
+    let(:user_id) { user.id }
+    let(:params) do
       {
         user_id: user_id,
-        request_id: request.id,
+        request_id: request_id,
         status: 'active'
       }
     end
 
     subject(:create_workflow) do
-      post api_v1_workflows_path(workflow: params), headers: headers
+      post api_v1_workflows_path(workflow: params), headers: valid_header(user)
     end
 
     context 'when workflow creates successfully' do
-      let(:user_id) { user.id }
-
       it 'creates workflow and returns workflow object' do
         create_workflow
         expect(response.status).to eql(201)
       end
     end
-    
+
     context 'when error occurs' do
       let(:user_id) { nil }
       it 'returns with unprocessable entity error' do
+        create_workflow
+        expect(response.status).to eql(422)
+      end
+    end
+
+    context 'when request_id is invalid' do
+      let(:request_id) { request.id + 1000 }
+
+      it 'returns error with request_id must exist message' do
+        create_workflow
+        expect(response.status).to eql(422)
+      end
+    end
+
+    context 'when user_id is invalid' do
+      let(:user_id) { user.id + 1000 }
+
+      it 'returns error with request_id must exist message' do
         create_workflow
         expect(response.status).to eql(422)
       end
@@ -140,7 +150,7 @@ describe 'Workflow API', type: :request do
 
   describe 'Delete workflow: DELETE /api/v1/workflows/<id>' do
     subject(:delete_workflow) do
-      delete api_v1_workflow_path(id), headers: headers
+      delete api_v1_workflow_path(id), headers: valid_header(user)
     end
 
     context 'when workflow is present' do

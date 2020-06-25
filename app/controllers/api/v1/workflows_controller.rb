@@ -22,7 +22,7 @@ module Api
         if @workflow
           json_response(@workflow, :ok)
         else
-          json_response({ message: 'Workflow not found'}, :not_found)
+          json_response({ message: 'Workflow not found' }, :not_found)
         end
       end
 
@@ -31,7 +31,7 @@ module Api
           @workflow.update(workflow_params)
           json_response(@workflow, :ok)
         else
-          json_response({ message: 'Workflow not found'}, :not_found)
+          json_response({ message: 'Workflow not found' }, :not_found)
         end
       end
 
@@ -40,7 +40,7 @@ module Api
           @workflow.destroy
           json_response({ message: 'Workflow has been deleted' }, :ok)
         else
-          json_response({ message: 'Workflow not found'}, :not_found)
+          json_response({ message: 'Workflow not found' }, :not_found)
         end
       end
 
