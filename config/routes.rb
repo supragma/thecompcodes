@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       post '/users/auth/login', to: 'auth#login'
-      post '/users/auth/password-reset', to: 'users#reset_pw_post'
+      post '/users/auth/password-reset', to: 'users#send_reset_token'
+      put '/users/auth/password-reset', to: 'users#reset_password'
       get '/auto_login', to: 'auth#auto_login'
       get '/user_is_authed', to: 'auth#user_is_authed'
 

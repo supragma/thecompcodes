@@ -97,6 +97,7 @@ workflows:
                 - master
                 - f/deploy
                 - f/deploy-test
+                - f/dev-test
 
       - deploy:
           requires:
@@ -109,3 +110,4 @@ workflows:
                 - master
                 - f/deploy
                 - f/deploy-test
+                - f/dev-test
