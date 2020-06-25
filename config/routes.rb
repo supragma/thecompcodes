@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get '/auto_login', to: 'auth#auto_login'
       get '/user_is_authed', to: 'auth#user_is_authed'
 
-      resources :requests, only: %i[index create]
+      resources :requests
       resources :users
       resources :workflows, only: %i[index create update show destroy]
       # resource :activity
