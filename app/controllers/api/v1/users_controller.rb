@@ -40,7 +40,7 @@ module Api
         @user = User.find_by(send_reset_params)
         if @user
           @password_reset = PasswordReset.create({ user: @user })
-          # UserNotifierMailer.pass_reset_email(@password_reset).deliver
+          UserNotifierMailer.pass_reset_email(@password_reset).deliver
           json_response({ message: 'PasswordReset Link Sent' })
         else
           json_response({ message: 'Invalid Email' })
