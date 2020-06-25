@@ -11,6 +11,23 @@ module Api
 
         render json: [requests].to_json, status: :ok
       end
+
+      def create
+        request = Request.new(request_params)
+        if request.save
+          json_response(request, :created)
+        else
+          render json: request.errors, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+      def request_params
+        params.require(:request).permit(
+          :name, :description
+        )
+      end
     end
   end
 end
