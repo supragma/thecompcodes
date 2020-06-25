@@ -72,6 +72,7 @@ resource "docker_container" "comp_code" {
     "DB_USERNAME=${var.POSTGRES_USER}",
     "DB_PASSWORD=${var.POSTGRES_PASSWORD}",
     "DB_NAME=${var.POSTGRES_DB}"
+    "SENDGRID_API_KEY=${var.SENDGRID_API_KEY}"
     
   ]
   volumes {
