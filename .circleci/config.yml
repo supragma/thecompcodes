@@ -61,7 +61,8 @@ jobs:
       - run:
           name: Run Tests
           command: bundle exec rake db:migrate RAILS_ENV=test
-
+      - store_artifacts:
+          path: coverage
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
   version: 2
