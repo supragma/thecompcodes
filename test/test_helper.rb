@@ -1,6 +1,9 @@
 require 'simplecov'
 SimpleCov.start 'rails'    # << Start simplecov, using the "Rails" preset.
 
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require_relative '../config/environment'
