@@ -60,8 +60,11 @@ jobs:
           name: Create DB
           command: bundle exec rake db:create RAILS_ENV=test
       - run:
-          name: Run Tests
+          name: Migrate DB
           command: bundle exec rake db:migrate RAILS_ENV=test
+      - run:
+          name: Run Test
+          command: bundle exec rake test RAILS_ENV=test
       - store_artifacts:
           path: coverage
 # We use workflows to orchestrate the jobs that we declared above.
