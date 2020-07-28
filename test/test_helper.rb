@@ -1,8 +1,11 @@
 require 'simplecov'
 SimpleCov.start 'rails'    # << Start simplecov, using the "Rails" preset.
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 
