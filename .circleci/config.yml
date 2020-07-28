@@ -5,6 +5,7 @@ version: 2.1 # Use 2.1 to enable using orbs and other features.
 orbs:
   ruby: circleci/ruby@1.0 
   node: circleci/node@2
+  codecov: codecov/codecov@1.1.1
 
 jobs:
   build: # our first job, named "build"
