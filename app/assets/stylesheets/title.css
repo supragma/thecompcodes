@@ -28,3 +28,35 @@
 .right-building {
   float: right;
 }
+
+.arch-design-center {
+  position: relative;
+  text-align: center;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.arch-design-top-left {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  font-size: 40px;
+}
+
+.sub-arch-design-top-left {
+  position: absolute;
+  top: 100px;
+  left: 80px;
+  font-size: 20px;
+  color: gray;
+  margin-right: 400px;
+  margin-top:30px;
+}
+
+.get-button-arch-design {
+  position: absolute;
+  top: 150px;
+  left: 80px;
+  margin-right: 400px;
+  margin-top: 120px;
+}
