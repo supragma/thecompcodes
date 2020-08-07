@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'aboutus', to: 'aboutus#index'
   get 'terms', to: 'terms#index'
   get 'privacy', to: 'privacy#index'
+  get 'services', to: 'services#index'
   # Set paths for the API.
   namespace :api, default: {format: :json} do
     namespace :v1 do
