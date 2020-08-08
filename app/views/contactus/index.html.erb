@@ -2,8 +2,13 @@
   <div class="contact-us-wrapper">
     <%= image_tag("contact-us-blue-box.png", class: "contact-us-background") %>
     <%= image_tag("open-a-box.png", class: "contact-us-open-box") %>
-    <div class="contact-us-header-text">Contact Us</div>
-    <div class="contact-us-sub-text">Feel free to drop us a message, we'll be happy to reply you back.</div>
+    <% if !@has_email_subscribed %>
+      <div class="contact-us-header-text">Contact Us</div>
+      <div class="contact-us-sub-text">Feel free to drop us a message, we'll be happy to reply you back.</div>
+    <% else %>
+      <div class="contact-us-header-text">Success!</div>
+      <div class="contact-us-sub-text">You have subscribed to our newsletter! Send us a message too =)</div>
+    <% end %>
     <div class="contact-us-name">Name</div>
     <div class="contact-us-name-box">
       <input type="text"></input>
