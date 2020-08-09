@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'subscribe', to: 'subscribe#index'
   post 'contactus', to: 'contactus#create'
   get 'getitnow', to: 'getitnow#index'
-  post 'getitnow', to: 'geteitnow#create'
+  post 'getitnow', to: 'getitnow#create'
   # Set paths for the API.
   namespace :api, default: {format: :json} do
     namespace :v1 do
