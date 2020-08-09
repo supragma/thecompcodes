@@ -7,6 +7,8 @@ class ContactusController < ApplicationController
   # Contact us view method.
   def index
     @has_email_subscribed = !params["femail"].nil?
+    @has_message_posted = !params["message"].nil?
+    @has_quote_request = !params["size"].nil?
     render 'index'
   end
 
@@ -14,6 +16,7 @@ class ContactusController < ApplicationController
   def create
     Message.create(name: params["name"], email: params["email"], message: params["message"])
     @has_message_posted = !params["message"].nil?
+    @has_quote_request = !params["size"].nil?
     render 'index'
   end
 end
