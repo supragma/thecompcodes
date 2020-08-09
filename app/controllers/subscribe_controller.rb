@@ -6,6 +6,7 @@ class SubscribeController < ApplicationController
 
   # Subscribeview method.
   def index
+    Subscribe.create(email: params["femail"])
     redirect_to contactus_url(request.parameters)
   end
 end
