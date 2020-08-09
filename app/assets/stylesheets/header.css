@@ -47,9 +47,8 @@
 
 /* Float the link section to the right */
 .header-right {
-  float: none;
+  float: right;
   padding-top: 50px;
-  width: 90%;
 }
 
 /* Float the link section to the left*/
