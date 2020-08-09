@@ -12,7 +12,7 @@ class ContactusController < ApplicationController
 
   # Post request for creating a message.
   def create
-    # TODO create a message in the database.
+    Message.create(name: params["name"], email: params["email"], message: params["message"])
     @has_message_posted = !params["message"].nil?
     render 'index'
   end
