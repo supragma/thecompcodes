@@ -1,13 +1,13 @@
 <div class="get-it-now-wrapper">
   <h2>Owner Information:</h2>
     <form action="getitnow" method="post">
-     <p><input placeholder="First Name..."></p>
-     <p><input placeholder="Last Name..."></p>
-     <p><input placeholder="Email..."></p>
-     <p><input placeholder="Address..."></p>
-     <p><input placeholder="Zip Code..."></p>
-     <p><input placeholder="Best Phone Number..."></p>
-     <p><textarea rows="15" cols="50" placeholder="Please tell us about your project, include as much details as possible..." oninput="this.className = ''"></textarea></p>
+     <p><input type="text" name="firstname" placeholder="First Name..."></p>
+     <p><input type="text" name="lastname" placeholder="Last Name..."></p>
+     <p><input type="text" name="email" placeholder="Email..."></p>
+     <p><input type="text" name="address" placeholder="Address..."></p>
+     <p><input type="text" name="zip"placeholder="Zip Code..."></p>
+     <p><input type="text" name="phone" placeholder="Best Phone Number..."></p>
+     <p><textarea rows="15" name="details" cols="50" id="details" placeholder="Please tell us about your project, include as much details as possible..." oninput="this.className = ''"></textarea></p>
      <p>Are you the owner or authorized to make property changes?</p>  
      <input type="radio" id="authorized-yes" name="authorized" value="yes">
      <label for="yes">Yes</label><br>
