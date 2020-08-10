@@ -12,6 +12,7 @@ class GetitnowController < ApplicationController
   # Get It Now post method.
   def create
     Getquote.create(json_blob: params.to_s)
+    GetQuoteMailer.new_quote(params.to_s).deliver
     redirect_to contactus_url(request.parameters)
   end
 end
