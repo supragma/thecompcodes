@@ -14,9 +14,10 @@ class ContactusController < ApplicationController
 
   # Post request for creating a message.
   def create
-    Message.create(name: params["name"], email: params["email"], message: params["message"])
+    msg = Message.create(name: params["name"], email: params["email"], message: params["message"])
     @has_message_posted = !params["message"].nil?
     @has_quote_request = !params["size"].nil?
+    ContactusMailer.new_contact_us(msg).deliver
     render 'index'
   end
 end
