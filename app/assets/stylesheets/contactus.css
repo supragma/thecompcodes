@@ -1,13 +1,14 @@
-.contact-us-background {
-  position: relative;
-  left: 0;
-  top: 0;
+.contact-us-wrapper {
+  postion: relative;
+  text-align: center;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .contact-us-open-box {
   position: absolute;
-  top: 44%;
-  left: 19%;
+  top: 234px;
+  left: 16%;
 }
 
 .contact-us-header-text {
@@ -16,16 +17,16 @@
   color: black;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 40px;
-  top: 90%;
-  left: 23%;
+  top: 500px;
+  left: 20%;
 }
 
 .contact-us-sub-text {
   position: absolute;;
   color: gray;
   font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  top: 100%;
+  text-align: left;
+  top: 600px;
   left: 15%;
   font-size: 18px;
   width: 35%;
@@ -36,8 +37,8 @@
   color: dodgerblue;;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  top: 40%;
-  left: 30%;
+  top: 250px;
+  left: 31%;
   font-size: 18px;
   width: 50%;
 }
@@ -47,8 +48,8 @@
   color: dodgerblue;;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  top: 45%;
-  left: 36%;
+  top: 280px;
+  left: 38%;
   font-size: 18px;
   width: 50%;
 }
@@ -58,8 +59,8 @@
   color: dodgerblue;;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  top: 57%;
-  left: 30%;
+  top: 345px;
+  left: 31%;
   font-size: 18px;
   width: 50%;
 }
@@ -68,8 +69,8 @@
   color: dodgerblue;;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  top: 61%;
-  left: 36%;
+  top: 366px;
+  left: 38%;
   font-size: 18px;
   width: 50%;
 }
@@ -79,8 +80,8 @@
   color: dodgerblue;;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  top: 72%;
-  left: 31%;
+  top: 439px;
+  left: 32%;
   font-size: 18px;
   width: 50%;
 }
@@ -90,8 +91,8 @@
   color: dodgerblue;;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  top: 78%;
-  left: 51%;
+  top: 476px;
+  left: 53%;
   font-size: 18px;
   width: 19%;
 }

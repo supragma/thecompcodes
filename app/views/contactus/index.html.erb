@@ -1,7 +1,6 @@
 <div class="title-wrapper">
   <div class="contact-us-wrapper">
-    <%= image_tag("contact-us-blue-box.png", class: "contact-us-background") %>
-    <%= image_tag("open-a-box.png", class: "contact-us-open-box") %>
+    <%= image_tag("contact-us-blue-box.png", class: "center") %>
     <% if @has_quote_request %>
       <div class="contact-us-header-text">Success!</div>
       <div class="contact-us-sub-text">We'll get you a quote as soon as possible!</div>
@@ -15,6 +14,9 @@
       <div class="contact-us-header-text">Contact Us</div>
       <div class="contact-us-sub-text">Feel free to drop us a message, we'll be happy to reply you back.</div>
     <% end %>
+    <div class="contact-us-open-box">
+      <%= image_tag("open-a-box.png", class: "") %>
+    </div>
     <form action="contactus" method="post" id="contactform">
       <div class="contact-us-name">Name</div>
       <div class="contact-us-name-box">
@@ -28,7 +30,7 @@
       <div class="contact-us-message-box">
         <textarea rows="5" cols="30" name="message"></textarea>
         <input class="contact-us-submit" value="Submit" type="submit"/>
+      </div>
     </form>
-    </div>
   </div>
 </div>
