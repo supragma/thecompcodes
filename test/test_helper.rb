@@ -1,5 +1,5 @@
 require 'simplecov'
-SimpleCov.start 'rails'    # << Start simplecov, using the "Rails" preset.
+SimpleCov.start    # << Start simplecov, using the "Rails" preset.
 
 
 if ENV['CI'] == 'true'
