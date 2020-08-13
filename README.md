@@ -1,6 +1,5 @@
 [![codecov](https://codecov.io/gh/supragma/thecompcodes/branch/master/graph/badge.svg)](https://codecov.io/gh/supragma/thecompcodes)
 
-CircleCI:
 [![supragma](https://circleci.com/gh/supragma/thecompcodes.svg?style=svg)](https://circleci.com/gh/supragma/thecompcodes)
 # README
 
