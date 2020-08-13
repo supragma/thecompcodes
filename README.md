@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/supragma/comp.code/branch/master/graph/badge.svg)](https://codecov.io/gh/supragma/comp.code)
+[![codecov](https://codecov.io/gh/supragma/thecompcodes/branch/master/graph/badge.svg)](https://codecov.io/gh/supragma/thecompcodes)
 
 # README
 
