@@ -5,6 +5,6 @@ class GetQuoteMailer < ApplicationMailer
   def new_quote(quote_info)
     @info = quote_info
     mail(to: 'christian@thecompcodes.com', subject: 'There is a new quote request') 
-    mail(to: 'raj@supragma.com', subject: 'There is a new quote request') 
+    mail(to: 'raj@thecompcodes.com', subject: 'There is a new quote request') 
   end
 end
