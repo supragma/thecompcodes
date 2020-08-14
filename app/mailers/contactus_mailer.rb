@@ -7,6 +7,6 @@ class ContactusMailer < ApplicationMailer
     @name = message.name
     @msg = message.message
     mail(to: 'christian@thecompcodes.com', subject: "There is a new contact message")
-    mail(to: 'raj@supragma.com', subject: "There is a new contact message")
+    mail(to: 'raj@thecompcodes.com', subject: "There is a new contact message")
   end
 end
