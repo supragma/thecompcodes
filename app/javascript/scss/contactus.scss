@@ -1,0 +1,62 @@
+@import "./variables.scss";
+
+.contact-us {
+  margin: 0 auto;
+  background: url("../images/contact-us-blue-box.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: space-around;
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: $grey3;
+  }
+
+  &__image {
+    width: 60%;
+    padding-right: 2rem;
+  }
+
+  &__form {
+    width: 40%;
+
+    @media screen and (max-width: 992px) {
+      margin-top: 2rem;
+    }
+  }
+
+  &__name,
+  &__email,
+  &__message {
+    color: dodgerblue;
+    margin: 1rem 0rem;
+    font-weight: 400;
+  }
+
+  &__name-box,
+  &__email-box,
+  &__message-box {
+    & > input,
+    textarea {
+      width: 100%;
+    }
+  }
+
+  &__submit {
+    width: 100%;
+    margin-top: 1rem;
+    border: none;
+    background-color: $yellow1;
+  }
+}

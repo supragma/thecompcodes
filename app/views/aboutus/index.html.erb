@@ -1,60 +1,78 @@
-<div class="title-wrapper">
-  <div class="about-us-center">
-    <%= image_tag("blue-background-about-us.png", class: "center") %>
-    <div class="about-us-top-left">About Us</div>
-    <div class="sub-about-us-top-left">The Comp Codes has an efficient team of Architectural/Engineering drafters, Licensed Architect, and Engineers that shepherd projects to successful completion at an affordable cost.</div>
-    <div class="about-us-guy-pointing">
-      <%= image_tag("guy-pointing-about-us.png", class: "") %>
+<div class="pt-16 pb-10">
+  <div class="container">
+    <div class="row">
+      <div class="p-4 col-xl-10 col-md-12 col-12 about-us d-flex">
+        <div class="about-us__titles">
+          <div class="about-us__title mt-4 mb-2">About Us</div>
+          <div class="about-us__subtitle">
+            The Comp Codes has an efficient team of Architectural/Engineering drafters, Licensed Architect, 
+            and Engineers that shepherd projects to successful completion at an affordable cost.
+          </div>
+        </div>
+        <div class="about-us__image">
+          <%= image_tag("guy-pointing-about-us.png", class: "") %>
+        </div>
+      </div>
     </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="about-us-header">What we can do</div>
-  <br>
-  <br>
-  <div class="about-us-sub-text">We can do Architecture, Engineering,
-Design, Permit Compliance, Planning and
-Development projects.</div>
-  <br>
-  <br>
-  <br>
-  <div class="cards">
-    <div class="card">
-    <%= image_tag("little_blue_house.png", class: "") %>
-      <ul>
-        <li>Single-Family Remodel</li>
-        <li>Single-Family New Construction</li>
-        <li>Multi-Family Remodel Projects</li>
-        <li>Multi-Family New Construction</li>
-      </ul>
+</div>
+<div class="py-lg-10 py-8">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6 col-12 text-center">
+        <h1 class="mb-3 h1 text-dark">What we can do</h2>
+        <p class="lead">We can do Architecture, Engineering,
+          Design, Permit Compliance, Planning and
+          Development projects.</p>
+      </div>
     </div>
-    <div class="card">
-      <%= image_tag("commercial_building.png", class: "") %>
-      <ul>
-        <li>Commercial Remodel</li>
-        <li>Commercial New Construction</li>
-        <li>Clean Room Design Built</li>
-        <li>Laboratory Design Built</li>
-        <li>Modular Design Built</li>
-      </ul>
-    </div>
-    <div class="card">
-    <%= image_tag("adu.png", class: "") %>
-      <ul>
-        <li>New Detached ADU-Only Structure With or Without Garage</li>
-        <li>Conversion of Accessory Structure to ADU</li>
-        <li>Conversion of Primary Unit's Attached Garage to ADU</li>
-        <li>ADU Attached to Primary Unit</li>
-        <li>ADU Fully Within Existing Primiary Unit</li>
-        <li>Junior(Jr) ADU Within Primary Dwelling Unit</li>
-        <li>Conversion of Multi-Family Structure Areas Not Used as Livable Space</li>
-        <li>Mixed ADU Types 1 to 4</li>
-      </ul>
+  </div>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-lg-4 col-md-6 col-12 py-3">
+        <div class="card mb-lg-0 mb-4 h-100">
+          <div class="card-body p-5">
+            <%= image_tag("little_blue_house.png", class: "") %>
+            <ul class="mt-4">
+              <li>Single-Family Remodel</li>
+              <li>Single-Family New Construction</li>
+              <li>Multi-Family Remodel Projects</li>
+              <li>Multi-Family New Construction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 py-3">
+        <div class="card mb-lg-0 mb-4 h-100">
+          <div class="card-body p-5">
+            <%= image_tag("commercial_building.png", class: "") %>
+            <ul class="mt-4">
+              <li>Commercial Remodel</li>
+              <li>Commercial New Construction</li>
+              <li>Clean Room Design Built</li>
+              <li>Laboratory Design Built</li>
+              <li>Modular Design Built</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 py-3">
+        <div class="card mb-lg-0 mb-4 h-100">
+          <div class="card-body p-5">
+            <%= image_tag("adu.png", class: "") %>
+            <ul class="mt-4">
+              <li>New Detached ADU-Only Structure With or Without Garage</li>
+              <li>Conversion of Accessory Structure to ADU</li>
+              <li>Conversion of Primary Unit's Attached Garage to ADU</li>
+              <li>ADU Attached to Primary Unit</li>
+              <li>ADU Fully Within Existing Primiary Unit</li>
+              <li>Junior(Jr) ADU Within Primary Dwelling Unit</li>
+              <li>Conversion of Multi-Family Structure Areas Not Used as Livable Space</li>
+              <li>Mixed ADU Types 1 to 4</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

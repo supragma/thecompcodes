@@ -1,36 +1,32 @@
-<div class="title-wrapper">
-  <div class="contact-us-wrapper">
-    <%= image_tag("contact-us-blue-box.png", class: "center") %>
-    <% if @has_quote_request %>
-      <div class="contact-us-header-text">Success!</div>
-      <div class="contact-us-sub-text">We'll get you a quote as soon as possible!</div>
-    <% elsif @has_message_posted %>
-      <div class="contact-us-header-text">Success!</div>
-      <div class="contact-us-sub-text">We'll get back to you as soon as possible!</div>
-    <% elsif @has_email_subscribed %>
-      <div class="contact-us-header-text">Success!</div>
-      <div class="contact-us-sub-text">You have subscribed to our newsletter! Send us a message too =)</div>
-    <% else %>
-      <div class="contact-us-header-text">Contact Us</div>
-      <div class="contact-us-sub-text">Feel free to drop us a message, we'll be happy to reply you back.</div>
-    <% end %>
-    <div class="contact-us-open-box">
-      <%= image_tag("open-a-box.png", class: "") %>
+<div class="pt-16 pb-10">
+  <div class="container">
+    <div class="row">
+      <div class="p-4 col-xl-10 col-md-12 col-12 contact-us d-flex">
+        <div class="contact-us__image">
+          <%= image_tag("open-a-box.png", class: "") %>
+          <div class="contact-us__title mt-4 mb-2">Contact Us</div>
+          <div class="contact-us__subtitle">
+            Feel free to drop us a message, we'll be happy to reply you back.
+          </div>
+        </div>
+        <div class="contact-us__form">
+          <form action="contactus" method="post" id="contactform">
+            <div class="contact-us__name">Name</div>
+            <div class="contact-us__name-box">
+              <input type="text" name="name" />
+            </div>
+            <div class="contact-us__email">Email</div>
+            <div class="contact-us__email-box">
+              <input type="text" name="email" />
+            </div>
+            <div class="contact-us__message">Message</div>
+            <div class="contact-us__message-box" >
+              <textarea rows="5" cols="30" name="message"></textarea>
+              <input class="contact-us__submit py-2" value="Submit" type="submit"/>
+            </div>
+        </form>
+        </div>
+      </div>
     </div>
-    <form action="contactus" method="post" id="contactform">
-      <div class="contact-us-name">Name</div>
-      <div class="contact-us-name-box">
-        <input type="text" name="name"></input>
-      </div>
-      <div class="contact-us-email">Email</div>
-      <div class="contact-us-email-box">
-        <input type="text" name="email"></input>
-      </div>
-      <div class="contact-us-message">Message</div>
-      <div class="contact-us-message-box">
-        <textarea rows="5" cols="30" name="message"></textarea>
-        <input class="contact-us-submit" value="Submit" type="submit"/>
-      </div>
-    </form>
   </div>
 </div>

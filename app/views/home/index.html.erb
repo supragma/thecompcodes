@@ -1,96 +1,117 @@
-<div class="title-wrapper">
-  <div class="left-building">
-    <%= image_tag("left-building.png", class: "") %> 
-  </div>
-  <div class="right-building">
-    <%= image_tag("right-building.png", class: "") %> 
-  </div>
-  <div class="title">We Turn Your Vision</div>
-  <div class="title">Into Reality</div>
-  <br><br><br>
-
-  <div class="sub-title">
-    The Comp Codes provides a swift and agile solution with the use
-of software to design and develop construction permit Plan Sets
-  </div>
-  <br><br><br>
-  <div class="get-button"> 
-    <a href="getitnow"><%= image_tag("get-it-now.png", class: "") %></a>
-  </div>
-
-<br><br><br>
-<br><br><br>
-
-  <div class="arch-design-center">
-    <%= image_tag("arch-design.png", class: "center") %> 
-    <div class="arch-design-top-left">Architectural Design</div>
-    <div class="sub-arch-design-top-left">The Comp Codes specializes in providing
-architectural, engineering, planning, design, and permitting compliance services for
-commercial and residential projects.</div>
-    <div class="get-button-arch-design"> 
-      <a href="getitnow"><%= image_tag("get-it-now.png", class: "") %></a>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="pt-16 pb-10 text-center text-dark">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-3 col-12">
+            <%= image_tag("left-building.png", class: "") %> 
+          </div>
+          <div class="col-lg-5 col-12">
+            <div class="row h-100 d-flex justify-content-center align-items-center">
+              <h1 class="display-3 font-weight-bold text-black h-100">
+                We Turn Your Vision Into Reality
+              </h1>
+            </div>
+          </div>
+          <div class="col-lg-3 col-12">
+            <%= image_tag("right-building.png", class: "") %> 
+          </div>
+        </div>
+        <p class="pt-4 px-lg-14 mb-4 home-lead">
+          The Comp Codes provides a swift and agile solution with the use of software to 
+          design and develop construction permit Plan Sets
+        </p>
+        <a href="/getitnow"><%= image_tag("get-it-now.png", class: "") %></a>
+      </div>
     </div>
   </div>
-
-<br><br><br>
-<br><br><br>
-
-  <div class="wrapper">
-    <div class="services-title"> The CompCodes's Architectural and </div>
-    <div class="services-title">Engineering services</div>
-    <br><br><br>
-    <div class="services-sub-title">
-    The Comp Codes's team of skilled Architectural and Engineering drafters, Architect, and
-Structural Engineer, along with its workflow software, are ready to take on projects and turn a
-customer's vision into buildings that enrich communities. Our Approach results in beautiful
-building designs, construction plan sets, and permitting processes at an affordable cost.
+</div>
+<div class="py-lg-10 py-8">
+  <div class="container">
+    <div class="row">
+      <div class="p-4 col-xl-8 col-md-12 col-12 arch-design">
+        <div class="arch-design__title mt-4 mb-2">Architectural Design</div>
+        <div class="arch-design__subtitle">
+          The Comp Codes specializes in providing architectural, engineering, 
+          planning, design, and permitting compliance services for
+          commercial and residential projects.
+        </div>
+        <div class="arch-design__btn mt-4 mb-2"> 
+          <a href="/getitnow"><%= image_tag("get-it-now.png", class: "") %></a>
+        </div>
+      </div>
     </div>
   </div>
-
-<br><br><br>
-<br><br><br>
 </div>
-<div class="take-on-projects">
-  <%= image_tag("background-image-blue.png", class: "take-on-projects") %>
-  <div class="take-on-projects-header-center"> The Comp Code is ready to take on projects and turn a customer's vision into buildings that enrich communities
-    <br>
-    <br>
-    <br>
-    <a href="getitnow"><%= image_tag("get-it-now.png", class: "projects-take-on-get-button") %></a>
+<div class="py-lg-10 py-8">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-10 col-12 text-center">
+        <h2 class="mb-3 h1">The CompCodes's Architectural and Engineering services</h2>
+        <p class="lead">
+          The Comp Codes's team of skilled Architectural and Engineering drafters, Architect, and
+          Structural Engineer, along with its workflow software, are ready to take on projects and turn a
+          customer's vision into buildings that enrich communities. Our Approach results in beautiful
+          building designs, construction plan sets, and permitting processes at an affordable cost.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
-<br>
-<br>
-<div class="tile-wrapper">
-  <div class="coming-soon">Coming Soon</div>
-  <br>
-  <div class="coming-soon-title">The Comp Codes's Software</div>
-  <div class="coming-soon-title">will roll out in 2020</div>
-</div>
-<br>
-<br>
-<div class="cards">
-  <div class="card">
-  <%= image_tag("bridge.png", class: "projects-take-on-get-button") %>
-  <br>
-  <br>
-    The software will allow Construction Professionals, Municipal Building and
-    Safety Departments to bridge the divide between construction and permitting.
-  </div>
-  <div class="card">
-    <%= image_tag("workflow.png", class: "projects-take-on-get-button") %>
-    <br>
-    <br>
-    Provide an Agile Work Flow Management of all Planning and Development construction processes
-  </div>
-  <div class="card">
-  <%= image_tag("pencil-protractor.png", class: "projects-take-on-get-button") %>
-    <br>
-    <br>
-    Generate Architectural and Engineering Plan Set Solutions
+<div class="py-lg-10 py-8 blue-bg">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-8 col-12 text-center">
+        <h2 class="mb-3 h2 home-subtitle1">The Comp Code is ready to take on projects and turn a customer's vision into buildings that enrich communities</h2>
+        <div class="py-4">
+          <a href="/getitnow"><%= image_tag("get-it-now.png", class: "") %></a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<br>
-<br>
-<br>
+<div class="py-lg-10 py-8">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6 col-12 text-center">
+        <p class="lead">Coming Soon</p>
+        <h2 class="mb-3 h2 text-dark">The Comp Code's Software will roll out in 2020</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card mb-lg-0 mb-4 h-100">
+          <div class="card-body p-5">
+            <div class="mb-4">
+              <%= image_tag("bridge.png") %>
+            </div>
+            <p>The software will allow Construction Professionals, Municipal Building and
+              Safety Departments to bridge the divide between construction and permitting.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card mb-lg-0 mb-4 h-100">
+          <div class="card-body p-5">
+            <div class="mb-4">
+              <%= image_tag("workflow.png") %>
+            </div>
+            <p>Provide an Agile Work Flow Management of all Planning and Development construction processes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card mb-lg-0 mb-4 h-100">
+          <div class="card-body p-5">
+            <div class="mb-4">
+              <%= image_tag("pencil-protractor.png") %>
+            </div>
+            <p>Generate Architectural and Engineering Plan Set Solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

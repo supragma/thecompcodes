@@ -1,0 +1,26 @@
+@import "./variables.scss";
+
+.header-collapse,
+.header-collapse .navbar-brand,
+.header-collapse .navbar-nav .nav-item .nav-link:hover {
+  background-color: white !important;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
+.nav-link {
+  color: $grey4 !important;
+}
+
+.nav-btn {
+  color: $grey4;
+  border: solid 3px $grey4;
+  border-radius: 4px;
+}
+
+.icon-bar {
+  background-color: black !important;
+}

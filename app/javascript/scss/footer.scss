@@ -1,0 +1,32 @@
+@import "./variables.scss";
+
+.footer-bg {
+  background: url("../images/background-image-blue.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.list-group-item-link {
+  color: white !important;
+}
+
+.footer-text,
+.list-inline-item {
+  color: white !important;
+}
+
+.footer-submit {
+  background-color: #ffc431;
+  width: 100%;
+}
+
+.social-medias {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  & > a + a {
+    margin-left: 1rem;
+  }
+}

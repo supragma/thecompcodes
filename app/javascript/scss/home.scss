@@ -1,0 +1,43 @@
+@import "./variables.scss";
+
+.home-lead {
+  font-size: 1.4rem;
+  color: $grey3;
+}
+
+.home-subtitle1 {
+  color: white;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.blue-bg {
+  background: url("../images/background-image-blue.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.arch-design {
+  margin: 0 auto;
+  background: url("../images/arch-design.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: $grey3;
+    width: 50%;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
