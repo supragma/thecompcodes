@@ -1,7 +1,12 @@
-// @import "bootstrap/scss/bootstrap.scss";
+@import "./variables.scss";
 
 @import "./header.scss";
 @import "./footer.scss";
 @import "./home.scss";
 @import "./aboutus.scss";
 @import "./contactus.scss";
+
+.card-title {
+  font-size: 20px;
+  font-weight: 500;
+}

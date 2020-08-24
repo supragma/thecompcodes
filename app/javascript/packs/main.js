@@ -12,7 +12,7 @@ $(document).ready(function () {
 
   if ($(".header").length) {
     $(window).scroll(function () {
-      if ($(".header").offset().top > 200) {
+      if ($(".header").offset().top > 40) {
         $(".header").addClass("header-collapse");
       } else {
         $(".header").removeClass("header-collapse");

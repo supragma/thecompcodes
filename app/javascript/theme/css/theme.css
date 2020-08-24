@@ -17306,7 +17306,7 @@ a.text-light-success:focus {
 }
 
 .header-collapse {
-  transition: 0.8s ease;
+  transition: 0.2s ease;
   background: #1e1835;
 }
 .header-collapse .navbar-brand {
