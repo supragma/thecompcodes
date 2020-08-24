@@ -1,5 +1,11 @@
 @import "./variables.scss";
 
+.home-title {
+  @media screen and (max-width: 998px) {
+    margin-top: 2rem;
+  }
+}
+
 .home-lead {
   font-size: 1.4rem;
   color: $grey3;

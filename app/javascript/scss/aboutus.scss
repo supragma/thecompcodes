@@ -30,11 +30,19 @@
     }
   }
 
-  &__image {
+  &__image-wrapper {
     width: 50%;
     @media screen and (max-width: 992px) {
       margin-top: 4rem;
       width: 100%;
     }
+
+    @media screen and (max-width: 992px) {
+      width: auto;
+    }
+  }
+
+  &__image {
+    width: 100%;
   }
 }
