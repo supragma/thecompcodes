@@ -10,7 +10,7 @@ require("channels");
 import "bootstrap";
 
 import "../theme/css/theme.css";
-import "../scss/index.scss";
+import "../stylesheets/application.scss";
 
 import "./main";
 

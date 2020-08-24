@@ -17509,7 +17509,7 @@ a.text-light-success:focus {
 }
 .bg-shape:after {
   position: absolute;
-  background: url(../images/curve-shape.svg);
+  background: url("../images/curve-shape.svg");
   background-size: cover;
   background-repeat: no-repeat;
   bottom: -15px;
