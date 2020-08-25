@@ -1,7 +1,197 @@
 <div class="pt-16 pb-10">
   <div class="container">
     <div class="row d-flex justify-content-center">
-    Coming Soon
+      <div class="col-md-12 mx-0">
+        <form id="msform" action="getitnow" method="post">
+            <!-- progressbar -->
+            <ul id="progressbar">
+              <li class="active" id="owner"><strong>Owner</strong></li>
+              <li id="location"><strong>Location/Service</strong></li>
+              <li id="project"><strong>Project</strong></li>
+            </ul> 
+            <!-- fieldsets -->
+            <fieldset>
+              <div class="form-card">
+                <h2 class="fs-title">Owner Information</h2> 
+                <br />
+                <div class="inputs-group col-md-12">
+                  <input type="text" name="firstname" placeholder="First Name...">
+                  <input type="text" name="lastname" placeholder="Last Name...">
+                  <input type="text" name="email" placeholder="Email...">
+                  <input type="text" name="address" placeholder="Address...">
+                  <input type="text" name="zip"placeholder="Zip Code...">
+                  <input type="text" name="phone" placeholder="Best Phone Number...">
+                </div>
+                <div class="col-md-12">
+                  <textarea class="getitnow-textarea" rows="12" name="details" id="details" placeholder="Please tell us about your project, include as much details as possible..."></textarea>
+                  <p class="getitnow-subtitle">Are you the owner or authorized to make property changes?</p>  
+                  <input type="radio" id="authorized-yes" name="authorized" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="authorized-no" name="authorized" value="no">
+                  <label for="no">No</label><br><br>
+                  
+                  <p class="getitnow-subtitle">Are you a Contractor?</p>
+                  <input type="radio" id="contractor-yes" name="contractor" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="contractor-no" name="contractor" value="no">
+                  <label for="no">No</label><br><br>
+                  
+                  <p class="getitnow-subtitle">Are you a pre-manufacture home/garage/deck company?</p>
+                  <input type="radio" id="prefab-yes" name="prefab" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="prefab-no" name="prefab" value="no">
+                  <label for="no">No</label><br><br>
+                  
+                  <p class="getitnow-subtitle">Are you a development company?</p>
+                  <input type="radio" id="devcompany-yes" name="devcompany" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="devcompany-no" name="devcompany" value="no">
+                  <label for="no">No</label>
+                </div>
+              </div>
+              <input type="button" name="next" class="next action-button" value="Next Step" />
+            </fieldset>
+            <fieldset>
+              <div class="form-card">
+                <h2 class="fs-title">Location/Service Information</h2> 
+                <br />
+                <div class="col-md-12">
+                  <p class="getitnow-subtitle">What kind of location is this?</p>
+                  <input type="radio" id="home" name="location" value="home">
+                  <label for="home">Home/Residence</label><br>
+                  <input type="radio" id="commercial" name="location" value="commercial">
+                  <label for="commercial">Commercial</label><br>
+                  <input type="radio" id="adu" name="location" value="adu">
+                  <label for="adu">ADU</label>
+                  <br>
+                  <br>
+                  <p class="getitnow-subtitle">What kind of project is this? (check all that apply)</p>
+                  <input type="checkbox" id="newconstruction" name="newconstruction" value="newconstruction">
+                  <label for="newconstruction">New Constuction</label><br>
+                  
+                  <input type="checkbox" id="adding" name="adding" value="adding">
+                  <label for="adding">Addition to Existing Structure</label><br>
+                  
+                  <input type="checkbox" id="remodel" name="remodel" value="remodel">
+                  <label for="remodel">Remodel of a few Rooms</label><br>
+                  
+                  <input type="checkbox" id="completeremodel" name="completeremodel" value="completeremodel">
+                  <label for="completeremodel">Complete Remodel</label><br>
+                  
+                  <input type="checkbox" id="tenantimprovement" name="tenantimprovement" value="tenantimprovement">
+                  <label for="tenantimprovement">Tenant Improvement</label><br>
+                  
+                  <input type="checkbox" id="structurerepair" name="structurerepair" value="structurerepair">
+                  <label for="structurerepair">Structural repair to an existing structure</label><br>
+                  
+                  <input type="checkbox" id="structure-eng" name="structure-eng" value="structure-eng">
+                  <label for="structure-eng">Structural Engineering</label><br>
+                  
+                  <br>
+                  <label class="getitnow-subtitle" for="project-other">Other:</label><br>
+                  <input type="text" id="project-other" name="project-other" value="">
+                </div>
+              </div> 
+              <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+              <input type="button" name="next" class="next action-button" value="Next Step" />
+            </fieldset>
+            <fieldset>
+              <div class="form-card">
+                <h2 class="fs-title">Project Information</h2>
+                <br />
+                <div class="col-md-12">
+                  <label class="getitnow-subtitle" for="size">What is the size of the project?</label><br>
+                  <select name="size" id="size">
+                    <option value="<500">Less than 500 sq ft</option>
+                    <option value="500-1000">500 to 1,000 sq ft</option>
+                    <option value="1000-1500">1,000 to 1,500 sq ft</option>
+                    <option value="1500-2000">1,500 to 2,000 sq ft</option>
+                    <option value="2000-2500">2,000 to 2,500 sq ft</option>
+                    <option value="2500-3000">2,500 to 3,000 sq ft</option>
+                    <option value="3000+">3,000 or more sq ft</option>
+                  </select><br><br>
+
+                  <p class="getitnow-subtitle">Does the project need any of the following?</p> 
+
+                  <p class="getitnow-subtitle">Interior Alterations</p>
+                  <input type="radio" id="yes" name="interioralt" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="interioralt" value="no">
+                  <label for="no">No</label><br><br>
+
+
+                  <p class="getitnow-subtitle">Exterior Alterations to the Structure</p>
+                  <input type="radio" id="yes" name="exterioralt" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="exterioralt" value="no">
+                  <label for="no">No</label><br><br>
+
+                  <p class="getitnow-subtitle">Earth Work (Grading)</p>
+                  <input type="radio" id="yes" name="earthwork" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="earthwork" value="no">
+                  <label for="no">No</label><br><br>
+
+                  <p class="getitnow-subtitle">Site Improvement (Outdoors)</p>
+                  <input type="radio" id="yes" name="siteimprovements" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="siteimprovements" value="no">
+                  <label for="no">No</label><br><br>
+
+                  <p class="getitnow-subtitle">Will you need Mechanical, Electrial and Plumbing work?</p>
+                  <input type="radio" id="yes" name="mech-elect-plumb" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="mech-elect-plumb" value="no">
+                  <label for="no">No</label><br><br>
+
+                  <p class="getitnow-subtitle">Sewer or Septics repairs</p>
+                  <input type="radio" id="yes" name="sewer" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="sewer" value="no">
+                  <label for="no">No</label><br><br>
+
+                  <p class="getitnow-subtitle">Changing the use of the building</p>
+                  <input type="radio" id="yes" name="changeuse" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="changeuse" value="no">
+                  <label for="no">No</label><br><br>
+
+                  <p class="getitnow-subtitle">Does the development have Covenants, Codes and Restrictions (CC&R that must be followed?</p>
+                  <input type="radio" id="yes" name="ccr" value="yes">
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="ccr" value="no">
+                  <label for="no">No</label><br>
+                  <input type="radio" id="dontknow" name="ccr" value="dontknow">
+                  <label for="dontknow">Don't know</label><br><br>
+
+                  <p class="getitnow-subtitle">Do any of the following issues need to be considered?</p>
+                  <input type="checkbox" id="zoning" name="zoning" value="yes">
+                  <label for="zoning">Zoning variance needed</label><br>
+
+                  <input type="checkbox" id="environment" name="environment" value="yes">
+                  <label for="environment">Environment concerns</label><br>
+
+                  <input type="checkbox" id="slope" name="slope" value="yes">
+                  <label for="slope">Steep Slope</label><br>
+
+                  <input type="checkbox" id="considerother" name="considerother" value="yes">
+                  <label for="considerother">Other</label><br>
+
+                  <input type="checkbox" id="considerdontknow" name="considerdontknow" value="dontknow">
+                  <label for="considerdontknow">Don't Know</label><br>
+
+                  <input type="checkbox" id="considerno" name="considerno" value="no">
+                  <label for="considerno">No</label><br><br>
+                  <br>
+                </div>
+              </div>
+              <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+              <input type="submit" class="next action-button" value="Confirm" />
+            </fieldset>
+        </form>
+      </div>
     </div>
   </div>
-</div>  
+</div>
+
+

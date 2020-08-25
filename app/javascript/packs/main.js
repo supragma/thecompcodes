@@ -1,15 +1,6 @@
 $(document).ready(function () {
   "user strict";
 
-  // Menu List
-
-  if ($(".menu-list").length) {
-    $(".menu-list").slimScroll({
-      height: "100%",
-    });
-  }
-  // header
-
   if ($(".header").length) {
     $(window).scroll(function () {
       if ($(".header").offset().top > 40) {
@@ -19,142 +10,64 @@ $(document).ready(function () {
       }
     });
   }
+});
 
-  /* menu js **/
+var current_fs, next_fs, previous_fs; //fieldsets
+var opacity;
 
-  if ($(".dropdown-menu a.dropdown-toggle").length) {
-    $(".dropdown-menu a.dropdown-toggle").on("click", function (e) {
-      if (!$(this).next().hasClass("show")) {
-        $(this).parents(".dropdown-menu").first().find(".show").removeClass("show");
-      }
-      var $subMenu = $(this).next(".dropdown-menu");
-      $subMenu.toggleClass("show");
+$(document).on("click", ".next", function () {
+  current_fs = $(this).parent();
+  next_fs = $(this).parent().next();
 
-      $(this)
-        .parents("li.nav-item.dropdown.show")
-        .on("hidden.bs.dropdown", function (e) {
-          $(".dropdown-submenu .show").removeClass("show");
+  //Add Class Active
+  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+  //show the next fieldset
+  next_fs.show();
+  //hide the current fieldset with style
+  current_fs.animate(
+    { opacity: 0 },
+    {
+      step: function (now) {
+        // for making fielset appear animation
+        opacity = 1 - now;
+
+        current_fs.css({
+          display: "none",
+          position: "relative",
         });
-
-      return false;
-    });
-  }
-
-  /* scroll nav js **/
-
-  if ($("#scroll-nav a ").length) {
-    $("#scroll-nav a").on("click", function () {
-      if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
-        if (target.length) {
-          $("html, body").animate(
-            {
-              scrollTop: target.offset().top - 0,
-            },
-            1500
-          );
-          return false;
-        }
-      }
-    });
-  }
-  // sidenav
-
-  if ($(".sidebar-nav-fixed a").length) {
-    $(".sidebar-nav-fixed a")
-      // Remove links that don't actually link to anything
-
-      .click(function (event) {
-        // On-page links
-        if (location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") && location.hostname == this.hostname) {
-          // Figure out element to scroll to
-          var target = $(this.hash);
-          target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
-          // Does a scroll target exist?
-          if (target.length) {
-            // Only prevent default if animation is actually gonna happen
-            event.preventDefault();
-            $("html, body").animate(
-              {
-                scrollTop: target.offset().top - 90,
-              },
-              1000,
-              function () {
-                // Callback after animation
-                // Must change focus!
-                var $target = $(target);
-                $target.focus();
-                if ($target.is(":focus")) {
-                  // Checking if the target was focused
-                  return false;
-                } else {
-                  $target.attr("tabindex", "-1"); // Adding tabindex for elements not focusable
-                  $target.focus(); // Set focus again
-                }
-              }
-            );
-          }
-        }
-        $(".sidebar-nav-fixed a").each(function () {
-          $(this).removeClass("active");
-        });
-        $(this).addClass("active");
-      });
-  }
-
-  // datepicker js
-
-  if ($("#program-date").length) {
-    var picker = new Lightpick({
-      field: document.getElementById("program-date"),
-      onSelect: function (date) {
-        document.getElementById("result-1").innerHTML = date.format("Do MMMM YYYY");
+        next_fs.css({ opacity: opacity });
       },
-    });
-  }
+      duration: 600,
+    }
+  );
+});
 
-  // leaflet
+$(document).on("click", ".previous", function () {
+  current_fs = $(this).parent();
+  previous_fs = $(this).parent().prev();
 
-  if ($("#mapid").length) {
-    var mymap = L.map("mapid").setView([51.505, -0.09], 13);
+  //Remove class active
+  $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 
-    L.tileLayer(
-      "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
-      {
-        maxZoom: 18,
-        attribution:
-          'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: "mapbox/streets-v11",
-        tileSize: 512,
-        zoomOffset: -1,
-      }
-    ).addTo(mymap);
-  }
+  //show the previous fieldset
+  previous_fs.show();
 
-  // magnific popup
+  //hide the current fieldset with style
+  current_fs.animate(
+    { opacity: 0 },
+    {
+      step: function (now) {
+        // for making fielset appear animation
+        opacity = 1 - now;
 
-  if ($(".popup-youtube").length) {
-    $(".popup-youtube").magnificPopup({
-      disableOn: 700,
-      type: "iframe",
-      mainClass: "mfp-fade",
-      removalDelay: 160,
-      preloader: false,
-      fixedContentPos: false,
-    });
-  }
-
-  // Tooltip
-  if ($('[data-toggle="tooltip"]').length) {
-    $('[data-toggle="tooltip"]').tooltip();
-  }
-
-  // Popover
-
-  if ($('[data-toggle="popover"]').length) {
-    $('[data-toggle="popover"]').popover();
-  }
+        current_fs.css({
+          display: "none",
+          position: "relative",
+        });
+        previous_fs.css({ opacity: opacity });
+      },
+      duration: 600,
+    }
+  );
 });
