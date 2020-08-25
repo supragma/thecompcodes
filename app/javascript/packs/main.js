@@ -41,6 +41,10 @@ $(document).on("click", ".next", function () {
       duration: 600,
     }
   );
+
+  $("html, body").animate({
+    scrollTop: 0,
+  });
 });
 
 $(document).on("click", ".previous", function () {
@@ -70,4 +74,8 @@ $(document).on("click", ".previous", function () {
       duration: 600,
     }
   );
+
+  $("html, body").animate({
+    scrollTop: 0,
+  });
 });

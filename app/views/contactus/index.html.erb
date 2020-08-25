@@ -4,10 +4,19 @@
       <div class="p-4 col-xl-10 col-md-12 col-12 contact-us d-flex">
         <div class="contact-us__image">
           <%= image_tag("open-a-box.png", class: "") %>
-          <div class="contact-us__title mt-4 mb-2">Contact Us</div>
-          <div class="contact-us__subtitle">
-            Feel free to drop us a message, we'll be happy to reply you back.
-          </div>
+          <% if @has_quote_request %>
+            <div class="contact-us__title mt-4 mb-2">Success!</div>
+            <div class="contact-us__subtitle">We'll get you a quote as soon as possible!</div>
+          <% elsif @has_message_posted %>
+            <div class="contact-us__title mt-4 mb-2">Success!</div>
+            <div class="contact-us__subtitle">We'll get back to you as soon as possible!</div>
+          <% elsif @has_email_subscribed %>
+            <div class="contact-us__title mt-4 mb-2">Success!</div>
+            <div class="contact-us__subtitle">You have subscribed to our newsletter! Send us a message too =)</div>
+          <% else %>
+            <div class="contact-us__title mt-4 mb-2">Contact Us</div>
+            <div class="contact-us__subtitle">Feel free to drop us a message, we'll be happy to reply you back.</div>
+          <% end %>
         </div>
         <div class="contact-us__form">
           <form action="contactus" method="post" id="contactform">
