@@ -48,7 +48,12 @@ class GetitnowController < ApplicationController
                             consider_dont_know: params["considerdontknow"] == "yes",
                             consider_no: params["consider_no"] == "yes"
                            )
-    GetQuoteMailer.new_quote(quote).deliver
+
+    # Send out emails to notify all parties.
+    GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
+    GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
+    SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 15.minutes)
+    SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 1.hour)
     redirect_to contactus_url(request.parameters)
   end
 end
