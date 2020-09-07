@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_09_232202) do
+ActiveRecord::Schema.define(version: 2020_09_07_165620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,40 @@ ActiveRecord::Schema.define(version: 2020_08_09_232202) do
     t.string "json_blob"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "address"
+    t.string "zip"
+    t.boolean "authorized"
+    t.boolean "contractor"
+    t.boolean "prefab"
+    t.boolean "dev_company"
+    t.string "location"
+    t.boolean "new_construction"
+    t.boolean "adding"
+    t.boolean "remodel"
+    t.boolean "complete_remodel"
+    t.boolean "tenant_improvement"
+    t.boolean "structural_repair"
+    t.boolean "structural_eng"
+    t.string "project_other"
+    t.string "size"
+    t.boolean "interior_alt"
+    t.boolean "exterior_alt"
+    t.boolean "earth_work"
+    t.boolean "site_improvements"
+    t.boolean "mech_elect_plumb"
+    t.boolean "sewer"
+    t.boolean "change_use"
+    t.string "ccr"
+    t.boolean "consider_zoning"
+    t.boolean "consider_environment"
+    t.boolean "consider_slope"
+    t.boolean "consider_other"
+    t.boolean "consider_dont_know"
+    t.boolean "consider_no"
+    t.string "phone"
   end
 
   create_table "messages", force: :cascade do |t|
