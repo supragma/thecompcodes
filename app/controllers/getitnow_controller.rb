@@ -61,8 +61,8 @@ class GetitnowController < ApplicationController
     SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.seconds)
     SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 10.seconds)
     # Send PDF to raj and christian.
-    SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver_later(wait: 10.seconds)
-    SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver_later(wait: 10.seconds)
+    SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver_later(wait: 5.minutes)
+    SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver_later(wait: 15.minutes)
     redirect_to contactus_url(request.parameters)
   end
 end
