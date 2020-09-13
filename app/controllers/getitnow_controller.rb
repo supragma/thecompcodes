@@ -48,12 +48,21 @@ class GetitnowController < ApplicationController
                             consider_dont_know: params["considerdontknow"] == "yes",
                             consider_no: params["consider_no"] == "yes"
                            )
-
+    # Generate a PDF
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name"
+      end
+    end
     # Send out emails to notify all parties.
     GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
     GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
-    SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 15.minutes)
-    SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 1.hour)
+    SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.seconds)
+    SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 10.seconds)
+    # Send PDF to raj and christian.
+    SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver_later(wait: 10.seconds)
+    SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver_later(wait: 10.seconds)
     redirect_to contactus_url(request.parameters)
   end
 end
