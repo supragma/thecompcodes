@@ -58,8 +58,8 @@ class GetitnowController < ApplicationController
     # Send out emails to notify all parties.
     GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
     GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
-    SendHelloMailer.send_hello(params["email"], quote).deliver
-    SendQuoteMailer.send_quote(params["email"], quote).deliver
+    SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.minutes)
+    SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 15.minutes)
     # Send PDF to raj and christian.
     SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
     SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver
