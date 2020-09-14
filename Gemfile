@@ -58,4 +58,5 @@ gem 'simplecov', require: false, group: :test
 gem 'codecov', require: false, group: 'test'
 gem 'uglifier'
 gem 'yui-compressor'
+gem 'prawn-table'
 gem 'prawn'
