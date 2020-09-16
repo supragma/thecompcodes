@@ -48,18 +48,15 @@ class GetitnowController < ApplicationController
                             consider_dont_know: params["considerdontknow"] == "yes",
                             consider_no: params["consider_no"] == "yes"
                            )
-    # Generate a PDF
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "file_name"
-      end
-    end
     # Send out emails to notify all parties.
     GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
     GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
     SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.minutes)
-    SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 15.minutes)
+    # Don't send a quote if it's greater than 3000 sqft.
+    if quote["size"] == "3000+"
+    else
+      SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 15.minutes)
+    end
     # Send PDF to raj and christian.
     SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
     SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver
