@@ -51,7 +51,9 @@ class SendQuoteMailer < ApplicationMailer
         pdf.text "www.thecompcodes.com", :align => :left
       end
       pdf.text "Scope of Work", :size => 14
-      pdf.text "\u2022 #{quote.details}"
+      if quote.details != ""
+        pdf.text "\u2022 #{quote.details}"
+      end
       pdf.text "\u2022 #{first_bullet_point(quote)}"
       pdf.text "\u2022 #{second_bullet_point(quote)}"
       if third_bullet_point(quote) != ""
@@ -71,24 +73,25 @@ class SendQuoteMailer < ApplicationMailer
 
       pdf.stroke_horizontal_rule
       pdf.move_down 10
-      pdf.text "Details of Invoice", :style => :bold_italic
+      pdf.text "Details of Invoice (next page)", :style => :bold_italic
       pdf.stroke_horizontal_rule
 
       item = 1
       total_price = 0
-      temp_arr = [{:name => "Item #{item.to_s}\nArch Sets\n#{arch_set_description(quote)}", :price => get_line_item_one_price(get_size(quote.size)).to_s}]
-      total_price += get_size(quote.size)
+      temp_arr = [{:name => "Arch Sets\n#{arch_set_description(quote)}", :price => get_line_item_one_price(get_size(quote.size)).to_s}]
+      total_price += get_price_from_string(get_line_item_one_price(get_size(quote.size)))
       item += 1
       if quote.earth_work
-        temp_arr.append({:name => "Item #{item.to_s}\nTopo Sets", :price => get_price_topography(get_size(quote.size)).to_s})
-        total_price += get_size(quote.size)
+        temp_arr.append({:name => "Topo Sets\n• Topography Survey
+• All Site and Utility Data to be included.", :price => get_price_topography(get_size(quote.size)).to_s})
+        total_price += get_price_from_string(get_price_topography(get_size(quote.size)))
         item += 1
       end
       if quote.site_improvements || quote.earth_work
-        temp_arr.append({:name => "Item #{item.to_s}\nCivil Engineering Sets", :price => get_price_civil(get_size(quote.size)).to_s})
-        total_price += get_size(quote.size)
+        temp_arr.append({:name => "Civil Engineering Sets\n• Site Demo, Site Improvements, Grading, and Utility Plans", :price => get_price_civil(get_size(quote.size)).to_s})
+        total_price += get_price_from_string(get_price_civil(get_size(quote.size)))
         item += 1
-      end   
+      end
       pdf.move_down 10
       items = [["No","Description", "Qt.", "Cost"]]
            items += temp_arr.each_with_index.map do |item, i|
@@ -108,9 +111,9 @@ class SendQuoteMailer < ApplicationMailer
       
       pdf.move_down 40
       pdf.text "Terms & Conditions of Sales"
-      pdf.text "1.	All payment should be made payable to Christian Cortes via Zelle (805.679.1282), Paypal (christiancortes09@gmail.com), or Check."
+      pdf.text "1. All payment should be made payable to Christian Cortes via Zelle (805.679.1282), Paypal (christiancortes09@gmail.com), or Check."
       
-      pdf.move_down 30
+      pdf.move_down 100
       
       pdf.stroke_horizontal_rule
       
@@ -118,6 +121,35 @@ class SendQuoteMailer < ApplicationMailer
         pagecount = pdf.page_count
         pdf.text "Page #{pagecount}"
       end
+      pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10) 
+      
+      pdf.stroke_horizontal_rule
+
+      pdf.grid([0,0], [1,1]).bounding_box do 
+        pdf.move_down 50
+        pdf.text "Initial Payment 50%", :align => :left
+        pdf.text "Final Payment 50%", :align => :left
+      end
+      
+      pdf.grid([0,3.6], [1,4]).bounding_box do 
+        # Company address
+        pdf.move_down 50
+        pdf.text "$#{(total_price/2).to_s}", :align => :left
+        pdf.text "$#{(total_price/2).to_s}", :align => :left
+      end
+      pdf.move_down 40
+      pdf.text "Notes:", :style => :italic
+      pdf.text "We look forward to working with you!" 
+      pdf.move_down 20
+      pdf.text "..............................."
+      pdf.text "#{quote.first_name} #{quote.last_name}"
+      
+      pdf.move_down 20
+      pdf.text "..............................."
+      pdf.text "Christian Cortes, CEO of TheCompCodes"
+
+      pdf.move_down 10
+      pdf.stroke_horizontal_rule
     end
   end
 
@@ -229,6 +261,48 @@ class SendQuoteMailer < ApplicationMailer
   end
 
   def arch_set_description(quote)
-    "Arch description"
+    "The Architectural Drafter will prepare new design and construction documents (drawings) for a #{quote.location} property. #{get_address_string(quote)} Deliverables: Signed and Stamped Drawings for submission to the building department for review and approval may include, but are not be limited to:\n
+• Cover Sheet and project Data.\n
+• Construction Notes.\n
+• Full and Partial Site Plan with dimensions and location as\n
+needed for Jurisdictional requirements.\n
+• Architectural Plans\n
+• Elevations as needed.\n
+• Product Schedules as needed\n
+• Structural Plans & Calculations as needed.\n
+• Sections as needed\n
+• Details as need\n
+#{has_mechanical_elect_plumbing(quote)}
+• Stamp and Signed Set of Complete Plans for permit Submittal.\n
+• Provide Support with submittal process to the City.\n
+• Perform preliminary analysis of how to submit project to\n
+keep the submittal process as simple as possible. "
+  end
+
+  def has_mechanical_elect_plumbing(quote)
+    if quote.mech_elect_plumb
+      return "• Mechanical, Electrical, and Plumbing Plans\n"
+    end
+    return ""
+  end
+
+  def get_address_string(quote)
+    text = "\nThe address of the location is "
+    if quote["address"] != "" && quote["zip"] != ""
+      text = "#{text} #{quote["address"]}, #{quote["zip"]}.\n"
+    elsif quote["address"] == "" && quote["zip"] != ""
+      text = "#{text} at zip code #{text quote["zip"]}.\n"
+    elsif quote["address"] != "" && quote["zip"] == ""
+      text = "#{text} #{quote["address"]}.\n"
+    else
+      return ""
+    end
+    return text 
+  end
+
+  def get_price_from_string(price)
+    price[0] = ""
+    price.to_i
   end
 end
+
