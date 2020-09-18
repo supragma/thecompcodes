@@ -10,7 +10,8 @@ class GetitnowControllerTest < ActionDispatch::IntegrationTest
   test "test posting contact us page" do
     post getitnow_url, params: { email: "some@email.com",
                                  name: "myname",
-                                 phone: "123456789" }
+                                 phone: "123456789",
+                                 size: "2000-2500"}
     assert @response.redirect_url.include? "contactus"
   end
 end
