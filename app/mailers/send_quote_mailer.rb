@@ -107,24 +107,10 @@ class SendQuoteMailer < ApplicationMailer
                        :column_widths => { 0 => 50, 1 => 350, 3 => 100}, :row_colors => ["d2e3ed", "FFFFFF"] do
         style(columns(3)) {|x| x.align = :right }
       end
-      
-      
-      pdf.move_down 40
-      pdf.text "Terms & Conditions of Sales"
-      pdf.text "1. All payment should be made payable to Christian Cortes via Zelle (805.679.1282), Paypal (christiancortes09@gmail.com), or Check."
-      
-      pdf.move_down 100
-      
-      pdf.stroke_horizontal_rule
-      
-      pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
-        pagecount = pdf.page_count
-        pdf.text "Page #{pagecount}"
-      end
+
+      pdf.start_new_page      
       pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10) 
       
-      pdf.stroke_horizontal_rule
-
       pdf.grid([0,0], [1,1]).bounding_box do 
         pdf.move_down 50
         pdf.text "Initial Payment 50%", :align => :left
@@ -148,8 +134,21 @@ class SendQuoteMailer < ApplicationMailer
       pdf.text "..............................."
       pdf.text "Christian Cortes, CEO of TheCompCodes"
 
-      pdf.move_down 10
+      pdf.move_down 20
       pdf.stroke_horizontal_rule
+      
+      pdf.move_down 20
+      pdf.text "Terms & Conditions of Sales"
+      pdf.text "1. All payment should be made payable to Christian Cortes via Zelle (805.679.1282), Paypal (christiancortes09@gmail.com), or Check."
+      
+      pdf.move_down 20
+      
+      pdf.stroke_horizontal_rule
+      
+      pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
+        pagecount = pdf.page_count
+        pdf.text "Page #{pagecount}"
+      end
     end
   end
 
