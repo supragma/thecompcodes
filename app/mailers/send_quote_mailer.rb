@@ -4,7 +4,7 @@ class SendQuoteMailer < ApplicationMailer
   # Method which sends out the email.
   def send_quote(to, quote)
     @info = quote
-    create_quote_file(quote, @price)
+    create_quote_file(quote)
     attachments['quote.pdf'] = File.read("#{Rails.root}/tmp/quote_#{@info.id.to_s}.pdf")
     mail(to: to, subject: 'A Quote From TheCompCodes') 
   end
@@ -16,7 +16,7 @@ class SendQuoteMailer < ApplicationMailer
     # 4 dollars per sqft
   end
 
-  def create_quote_file(quote, price)
+  def create_quote_file(quote)
     Prawn::Document.generate("#{Rails.root}/tmp/quote_#{@info.id.to_s}.pdf") do |pdf|
       pdf.font "Helvetica"
       # Defining the grid 
