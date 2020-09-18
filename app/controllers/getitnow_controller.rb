@@ -55,7 +55,7 @@ class GetitnowController < ApplicationController
     # Don't send a quote if it's greater than 3000 sqft.
     if quote["size"] == "3000+"
     else
-      SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 30.minutes)
+      SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 32.minutes)
     end
     # Send PDF to raj and christian.
     SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
