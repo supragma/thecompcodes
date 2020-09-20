@@ -46,7 +46,8 @@ class GetitnowController < ApplicationController
                             consider_slope: params["considerslope"] == "yes",
                             consider_other: params["considerother"] == "yes",
                             consider_dont_know: params["considerdontknow"] == "yes",
-                            consider_no: params["consider_no"] == "yes"
+                            consider_no: params["consider_no"] == "yes",
+                            referral: params["referral"]
                            )
     # Send out emails to notify all parties.
     GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
