@@ -125,7 +125,7 @@ class SendQuoteMailer < ApplicationMailer
       end
       pdf.move_down 40
       pdf.text "Notes:", :style => :italic
-      pdf.text "We look forward to working with you!" 
+      pdf.text "If you need a contractor or construction administrator please let me know and we can help you in this regard. We look forward to working with you!" 
       pdf.move_down 20
       pdf.text "..............................."
       pdf.text "#{quote.first_name} #{quote.last_name}"
