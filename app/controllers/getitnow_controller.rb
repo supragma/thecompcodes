@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'securerandom'
 # Controller for the get it now service controller.
 class GetitnowController < ApplicationController
   skip_before_action :verify_authenticity_token
@@ -49,9 +49,15 @@ class GetitnowController < ApplicationController
                             consider_no: params["consider_no"] == "yes",
                             referral: params["referral"]
                            )
+    # Create the cooresponding user.
+    user = User.create(email: params["email"], first_name: params["firstname"],
+                       last_name: params["lastname"], phone: params["phone"],
+                       refcode: SecureRandom.urlsafe_base64(7).upcase!,
+                       zip: params["zip"], getquote_id: quote.id)
     # Send out emails to notify all parties.
     GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
     GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
+    # Send a welcome email.
     SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.minutes)
     # Don't send a quote if it's greater than 3000 sqft.
     if quote["size"] == "3000+"
@@ -61,6 +67,11 @@ class GetitnowController < ApplicationController
     # Send PDF to raj and christian.
     SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
     SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver
+
+    # Send email telling users about their reference code.
+    ReferenceCodeMailer.send_ref_code("navraj@thecompcodes.com", user).deliver
+    ReferenceCodeMailer.send_ref_code("christian@thecompcodes.com", user).deliver
+    ReferenceCodeMailer.send_ref_code(params["email"], user).deliver_later(wait:65.minutes)
     redirect_to contactus_url(request.parameters)
   end
 end
