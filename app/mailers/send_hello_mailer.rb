@@ -4,6 +4,6 @@ class SendHelloMailer < ApplicationMailer
   def send_hello(to, quote)
     @info = quote
     mail(to: to, from: "christian@thecompcodes.com", 
-         subject: 'A Quote From TheCompCodes') 
+         subject: 'Quote Request') 
   end
 end
