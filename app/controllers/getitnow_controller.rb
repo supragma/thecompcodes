@@ -11,6 +11,11 @@ class GetitnowController < ApplicationController
 
   # Get It Now post method.
   def create
+    puts "CRETE PDF"
+    lotsize = 0
+    if params["lotsize"] != "" && regex_is_number?(params["lotsize"])
+      lotsize = params["lotsize"].to_i
+    end
     quote = Getquote.create(json_blob: params.to_s,
                             first_name: params["firstname"],
                             last_name: params["lastname"],
@@ -33,6 +38,7 @@ class GetitnowController < ApplicationController
                             structural_eng: params["structure-eng"] == "yes",
                             project_other: params["project-other"],
                             size: params["size"],
+                            lot_size: lotsize,
                             interior_alt: params["interioralt"] == "yes",
                             exterior_alt: params["exterioralt"] == "yes",
                             earth_work: params["earthwork"] == "yes",
@@ -57,21 +63,32 @@ class GetitnowController < ApplicationController
     # Send out emails to notify all parties.
     GetQuoteMailer.new_quote("christian@thecompcodes.com", quote).deliver
     GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
+
     # Send a welcome email.
     SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.minutes)
+
     # Don't send a quote if it's greater than 3000 sqft.
     if quote["size"] == "3000+"
     else
       SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 32.minutes)
     end
-    # Send PDF to raj and christian.
-    SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
-    SendQuoteMailer.send_quote("navraj@thecompcodes.com", quote).deliver
 
     # Send email telling users about their reference code.
     ReferenceCodeMailer.send_ref_code("navraj@thecompcodes.com", user).deliver
     ReferenceCodeMailer.send_ref_code("christian@thecompcodes.com", user).deliver
     ReferenceCodeMailer.send_ref_code(params["email"], user).deliver_later(wait:65.minutes)
     redirect_to contactus_url(request.parameters)
+  end
+
+  private
+
+  def regex_is_number?(string)
+    no_commas =  string.gsub(',', '')
+    matches = no_commas.match(/-?\d+(?:\.\d+)?/)
+    if !matches.nil? && matches.size == 1 && matches[0] == no_commas
+      return true
+    else
+      return false
+    end
   end
 end

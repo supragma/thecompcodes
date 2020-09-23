@@ -11,11 +11,6 @@ class SendQuoteMailer < ApplicationMailer
 
   private
 
-  # Calculate the quote for the cusomter.
-  def calculate_line_item_one(quote)
-    # 4 dollars per sqft
-  end
-
   def create_quote_file(quote)
     Prawn::Document.generate("#{Rails.root}/tmp/quote_#{@info.id.to_s}.pdf") do |pdf|
       pdf.font "Helvetica"
@@ -81,17 +76,28 @@ class SendQuoteMailer < ApplicationMailer
       temp_arr = [{:name => "Arch Sets\n#{arch_set_description(quote)}", :price => get_line_item_one_price(get_size(quote.size)).to_s}]
       total_price += get_price_from_string(get_line_item_one_price(get_size(quote.size)))
       item += 1
-      if quote.earth_work
+      if quote.earth_work && quote.lot_size == 0
         temp_arr.append({:name => "Topo Sets\n• Topography Survey
 • All Site and Utility Data to be included.", :price => get_price_topography(get_size(quote.size)).to_s})
         total_price += get_price_from_string(get_price_topography(get_size(quote.size)))
         item += 1
+      elsif quote.earth_work && quote.lot_size != 0 # Use lot size to calculate price.
+        temp_arr.append({:name => "Topo Sets\n• Topography Survey
+• All Site and Utility Data to be included.", :price => get_price_topography(quote.lot_size).to_s})
+        total_price += get_price_from_string(get_price_topography(quote.lot_size))
+        item += 1
       end
-      if quote.site_improvements || quote.earth_work
+
+      if (quote.site_improvements || quote.earth_work) && quote.lot_size == 0
         temp_arr.append({:name => "Civil Engineering Sets\n• Site Demo, Site Improvements, Grading, and Utility Plans", :price => get_price_civil(get_size(quote.size)).to_s})
         total_price += get_price_from_string(get_price_civil(get_size(quote.size)))
         item += 1
+      elsif (quote.site_improvements || quote.earth_work) && quote.lot_size != 0
+        temp_arr.append({:name => "Civil Engineering Sets\n• Site Demo, Site Improvements, Grading, and Utility Plans", :price => get_price_civil(quote.lot_size).to_s})
+        total_price += get_price_from_string(get_price_civil(quote.lot_size))
+        item += 1
       end
+
       pdf.move_down 10
       items = [["No","Description", "Qt.", "Cost"]]
            items += temp_arr.each_with_index.map do |item, i|
@@ -252,11 +258,11 @@ class SendQuoteMailer < ApplicationMailer
   end
 
   def get_price_topography(footage)
-    "$" + (footage * 5).to_s
+    "$" + (footage * 4).to_s
   end
 
   def get_price_civil(footage)
-    "$" + (footage * 5).to_s
+    "$" + (footage * 4).to_s
   end
 
   def arch_set_description(quote)
