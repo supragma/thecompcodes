@@ -11,9 +11,10 @@ class GetitnowController < ApplicationController
 
   # Get It Now post method.
   def create
-    puts "CRETE PDF"
     lotsize = 0
-    if params["lotsize"] != "" && regex_is_number?(params["lotsize"])
+    if params["lotsize"] != "" && 
+       params["lotsize"] != nil &&
+       regex_is_number?(params["lotsize"])
       lotsize = params["lotsize"].to_i
     end
     quote = Getquote.create(json_blob: params.to_s,
