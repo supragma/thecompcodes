@@ -49,8 +49,12 @@ class SendQuoteMailer < ApplicationMailer
       if quote.details != ""
         pdf.text "\u2022 #{quote.details}"
       end
-      pdf.text "\u2022 #{first_bullet_point(quote)}"
-      pdf.text "\u2022 #{second_bullet_point(quote)}"
+      if  first_bullet_point(quote) != ""
+        pdf.text "\u2022 #{first_bullet_point(quote)}"
+      end
+      if second_bullet_point(quote) != ""
+        pdf.text "\u2022 #{second_bullet_point(quote)}"
+      end
       if third_bullet_point(quote) != ""
         pdf.text "\u2022 #{third_bullet_point(quote)}"
       end
