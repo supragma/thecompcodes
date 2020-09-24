@@ -72,12 +72,13 @@ class GetitnowController < ApplicationController
     if quote["size"] == "3000+"
       # Do nothing. This is a manual request.
     else
+      SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 62.minutes)
       SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
     end
 
     # Send email telling users about their reference code.
-    #ReferenceCodeMailer.send_ref_code("navraj@thecompcodes.com", user).deliver
-    #ReferenceCodeMailer.send_ref_code("christian@thecompcodes.com", user).deliver
+    ReferenceCodeMailer.send_ref_code("navraj@thecompcodes.com", user).deliver
+    ReferenceCodeMailer.send_ref_code("christian@thecompcodes.com", user).deliver
     ReferenceCodeMailer.send_ref_code(params["email"], user).deliver_later(wait:65.minutes)
     redirect_to contactus_url(request.parameters)
   end
