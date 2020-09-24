@@ -60,3 +60,5 @@ gem 'uglifier'
 gem 'yui-compressor'
 gem 'prawn-table'
 gem 'prawn'
+
+gem 'sidekiq'
