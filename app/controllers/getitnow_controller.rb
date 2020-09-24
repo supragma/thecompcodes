@@ -73,7 +73,7 @@ class GetitnowController < ApplicationController
       # Do nothing. This is a manual request.
     else
       SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 62.minutes)
-      SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver
+      SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver_later(wait: 62.minutes)
     end
 
     # Send email telling users about their reference code.
