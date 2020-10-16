@@ -58,17 +58,20 @@ class SendQuoteMailer < ApplicationMailer
       if third_bullet_point(quote) != ""
         pdf.text "\u2022 #{third_bullet_point(quote)}"
       end
-      if quote.site_improvements
-        pdf.text "\u2022 Project requires Civil Engineering."
-      elsif quote.earth_work
-        pdf.text "\u2022 Project requires Topography Survey and Civil Engineering."
-      else
-        pdf.text "\u2022 Should the Project Require Topography Survey, or Civil Engineering Set we can offer it at an additional cost."
+
+      pdf.text "\u2022 #{fourth_bullet_point(quote)}"
+
+      if quote.interior_alt
+        pdf.text "\u2022 Provide Renderings and Construction Documents for Interior alterations"
       end
 
-      if quote.interior_alt || quote.exterior_alt
-        pdf.text "\u2022 Project requires Structural Engineering."
+      if quote.exterior_alt
+        pdf.text "\u2022 Provide Renderings and Construction Documents for Exterior alterations"
       end
+
+      pdf.text "\u2022 Project will require MEP sets and Title 24 Report."
+
+      pdf.text "\u2022 Should the Project Require Topography Survey, or Civil Engineering Set we can offer it at an additional cost."
 
       pdf.stroke_horizontal_rule
       pdf.move_down 10
@@ -80,27 +83,6 @@ class SendQuoteMailer < ApplicationMailer
       temp_arr = [{:name => "Arch Sets\n#{arch_set_description(quote)}", :price => get_line_item_one_price(get_size(quote.size)).to_s}]
       total_price += get_price_from_string(get_line_item_one_price(get_size(quote.size)))
       item += 1
-      if quote.earth_work && quote.lot_size == 0
-        temp_arr.append({:name => "Topo Sets\n• Topography Survey
-• All Site and Utility Data to be included.", :price => get_price_topography(get_size(quote.size)).to_s})
-        total_price += get_price_from_string(get_price_topography(get_size(quote.size)))
-        item += 1
-      elsif quote.earth_work && quote.lot_size != 0 # Use lot size to calculate price.
-        temp_arr.append({:name => "Topo Sets\n• Topography Survey
-• All Site and Utility Data to be included.", :price => get_price_topography(quote.lot_size).to_s})
-        total_price += get_price_from_string(get_price_topography(quote.lot_size))
-        item += 1
-      end
-
-      if (quote.site_improvements || quote.earth_work) && quote.lot_size == 0
-        temp_arr.append({:name => "Civil Engineering Sets\n• Site Demo, Site Improvements, Grading, and Utility Plans", :price => get_price_civil(get_size(quote.size)).to_s})
-        total_price += get_price_from_string(get_price_civil(get_size(quote.size)))
-        item += 1
-      elsif (quote.site_improvements || quote.earth_work) && quote.lot_size != 0
-        temp_arr.append({:name => "Civil Engineering Sets\n• Site Demo, Site Improvements, Grading, and Utility Plans", :price => get_price_civil(quote.lot_size).to_s})
-        total_price += get_price_from_string(get_price_civil(quote.lot_size))
-        item += 1
-      end
 
       pdf.move_down 10
       items = [["No","Description", "Qt.", "Cost"]]
@@ -206,6 +188,10 @@ class SendQuoteMailer < ApplicationMailer
     return text
   end
 
+  def fourth_bullet_point(quote)
+    "All Design and Construction documents will follow City of #{quote.zip} Design and Construction Standards."
+  end
+
   def third_bullet_point(quote)
     text = "Project will require "
     number_of_items_added = 0
@@ -258,15 +244,15 @@ class SendQuoteMailer < ApplicationMailer
   end
 
   def get_line_item_one_price(footage)
-    "$" + (footage * 4).to_s
+    "$" + (footage * 4.5).to_i.to_s
   end
 
   def get_price_topography(footage)
-    "$" + (footage * 4).to_s
+    "$" + (footage * 4.5).to_i.to_s
   end
 
   def get_price_civil(footage)
-    "$" + (footage * 4).to_s
+    "$" + (footage * 4.5).to_i.to_s
   end
 
   def arch_set_description(quote)
