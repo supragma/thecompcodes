@@ -69,8 +69,6 @@ class SendQuoteMailer < ApplicationMailer
         pdf.text "\u2022 Provide Renderings and Construction Documents for Exterior alterations"
       end
 
-      pdf.text "\u2022 Project will require MEP sets and Title 24 Report."
-
       pdf.text "\u2022 Should the Project Require Topography Survey, or Civil Engineering Set we can offer it at an additional cost."
 
       pdf.stroke_horizontal_rule
@@ -249,6 +247,7 @@ class SendQuoteMailer < ApplicationMailer
 
   def arch_set_description(quote)
     "The Architectural Drafter will prepare new design and construction documents (drawings) for a #{quote.location} property. #{get_address_string(quote)} Deliverables: Signed and Stamped Drawings for submission to the building department for review and approval may include, but are not be limited to:\n
+• Project will require MEP sets and Title 24 Report.
 • Cover Sheet and project Data.\n
 • Construction Notes.\n
 • Full and Partial Site Plan with dimensions and location as\n
