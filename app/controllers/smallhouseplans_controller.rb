@@ -3,7 +3,7 @@
 # Controller for the small house plans landing page.
 class SmallhouseplansController < ApplicationController
 
-  # Root view method.
+  # Small house plans view method.
   def index
     render 'index'
   end

@@ -3,7 +3,7 @@
 # Controller for the large house plans landing page.
 class LargehouseplansController < ApplicationController
 
-  # Root view method.
+  # Large house plans view method.
   def index
     render 'index'
   end

@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="pt-16 pb-10 text-center text-dark">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-3 col-12 d-none d-lg-block">
+            <%= image_tag("left-building.png", class: "") %> 
+          </div>
+          <div class="col-lg-5 col-12">
+            <div class="row h-100 d-flex justify-content-center align-items-center">
+              <h1 class="display-3 font-weight-bold text-black h-100 home-title">
+                Projects We've Worked On
+              </h1>
+            </div>
+          </div>
+          <div class="col-lg-3 col-12 d-none d-lg-block">
+            <%= image_tag("right-building.png", class: "") %> 
+          </div>
+        </div>
+        <p class="pt-4 px-lg-14 mb-4 home-lead">
+          The Comp Codes has worked on a variety of projects. We're your one stop shop for all your design and architectural needs.
+        </p>
+        <a href="/getitnow"><%= image_tag("get-quote-now.png", class: "") %></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-lg-10 py-8 blue-bg">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-8 col-12 text-center">
+        <h2 class="mb-3 h2 home-subtitle1"></h2>
+        <h2 class="mb-3 h2 home-subtitle2">"CompCodes Architecture services were Performed in a professional manner, even with shortfalls of current COVID-19 Situation.
+This company was very transparent with the cost and details of the service provided. The cost of services turned out to be a great value. 
+I will be using this company for the next follow-up project next spring. Thanks The CompCodes for your services "<br>--Thomas Boyden<br><br>
+         "It's a no brainer to use The Comp Codes for all your design and drafting needs! They really came through with what I asked for when remodeling our kitchen and deck project with stairs."<br>--John Bradly<br><br>
+         "After looking at a few vendors we went with The Comp Codes because they had the best prices and references. They made quick work on a garage addition to my home. I can't recommend them enough."<br>--William Jackson</h2> 
+        <div class="py-4">
+          <a href="/getitnow"><%= image_tag("get-quote-now.png", class: "") %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="py-lg-10 py-8">
+  <div class="container">
+    <div class="row">
+      <div class="p-4 col-xl-8 col-md-12 col-12 arch-design">
+        <div class="arch-design__title mt-4 mb-2">Architectural Design</div>
+        <div class="arch-design__subtitle">
+          The Comp Codes specializes in providing architectural, engineering, 
+          planning, design, and permitting compliance services for
+          commercial and residential projects.
+        </div>
+        <div class="arch-design__btn mt-4 mb-2"> 
+          <a href="/getitnow"><%= image_tag("get-quote-now.png", class: "") %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="p-4 col-xl-10 col-md-12 col-12 contact-us d-flex">
+      <div class="contact-us__image">
+        <%= image_tag("open-a-box.png", class: "") %>
+          <div class="contact-us__title mt-4 mb-2">Contact Us</div>
+          <div class="contact-us__subtitle">Feel free to drop us a message, we'll be happy to reply you back.</div>
+      </div>
+      <div class="contact-us__form">
+        <form action="contactus" method="post" id="contactform">
+          <div class="contact-us__name">Name</div>
+          <div class="contact-us__name-box">
+            <input type="text" name="name" />
+          </div>
+          <div class="contact-us__email">Email</div>
+          <div class="contact-us__email-box">
+            <input type="text" name="email" />
+          </div>
+          <div class="contact-us__message">Message</div>
+          <div class="contact-us__message-box" >
+            <textarea rows="5" cols="30" name="message"></textarea>
+            <input class="contact-us__submit py-2" value="Submit" type="submit"/>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
