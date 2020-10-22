@@ -247,7 +247,7 @@ class SendQuoteMailer < ApplicationMailer
 
   def arch_set_description(quote)
     "The Architectural Drafter will prepare new design and construction documents (drawings) for a #{quote.location} property. #{get_address_string(quote)} Deliverables: Signed and Stamped Drawings for submission to the building department for review and approval may include, but are not be limited to:\n
-• Project will require MEP sets and Title 24 Report.
+• Project will require MEP sets and Title 24 Report.\n
 • Cover Sheet and project Data.\n
 • Construction Notes.\n
 • Full and Partial Site Plan with dimensions and location as\n
