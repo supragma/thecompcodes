@@ -66,20 +66,20 @@ class GetitnowController < ApplicationController
     GetQuoteMailer.new_quote("navraj@thecompcodes.com", quote).deliver
 
     # Send a welcome email.
-    SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.minutes)
+    #SendHelloMailer.send_hello(params["email"], quote).deliver_later(wait: 5.minutes)
 
     # Don't send a quote if it's greater than 3000 sqft.
     if quote["size"] == "3000+"
       # Do nothing. This is a manual request.
     else
-      SendQuoteMailer.send_quote(params["email"], quote).deliver_later(wait: 62.minutes)
+      SendQuoteMailer.send_quote(params["email"], quote).deliver
       SendQuoteMailer.send_quote("christian@thecompcodes.com", quote).deliver_later(wait: 62.minutes)
     end
 
     # Send email telling users about their reference code.
-    ReferenceCodeMailer.send_ref_code("navraj@thecompcodes.com", user).deliver
-    ReferenceCodeMailer.send_ref_code("christian@thecompcodes.com", user).deliver
-    ReferenceCodeMailer.send_ref_code(params["email"], user).deliver_later(wait:65.minutes)
+    #ReferenceCodeMailer.send_ref_code("navraj@thecompcodes.com", user).deliver
+    #ReferenceCodeMailer.send_ref_code("christian@thecompcodes.com", user).deliver
+    #ReferenceCodeMailer.send_ref_code(params["email"], user).deliver_later(wait:65.minutes)
     redirect_to contactus_url(request.parameters)
   end
 
