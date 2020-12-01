@@ -242,7 +242,7 @@ class SendQuoteMailer < ApplicationMailer
   end
 
   def get_line_item_one_price(footage)
-    "$" + (footage * 5).to_i.to_s
+    "$" + (footage * 7).to_i.to_s
   end
 
   def arch_set_description(quote)
