@@ -78,8 +78,8 @@ class SendQuoteMailer < ApplicationMailer
 
       item = 1
       total_price = 0
-      temp_arr = [{:name => "Arch Sets\n#{arch_set_description(quote)}", :price => get_line_item_one_price(get_size(quote.size)).to_s}]
-      total_price += get_price_from_string(get_line_item_one_price(get_size(quote.size)))
+      temp_arr = [{:name => "Arch Sets\n#{arch_set_description(quote)}", :price => get_line_item_one_price(quote.size.to_i).to_s}]
+      total_price += get_price_from_string(get_line_item_one_price(quote.size.to_i))
       item += 1
 
       pdf.move_down 10
@@ -146,30 +146,29 @@ class SendQuoteMailer < ApplicationMailer
 
   def first_bullet_point(quote)
     text = ""
-    size = get_size(quote.size)
     if quote.new_construction
-      text += "New construction of " + size.to_s + " sq. ft. "
+      text += "New construction of " + quote.size + " sq. ft. "
     end
     if quote.adding
-      text += "Adding unit of " + size.to_s + " sq. ft. "
+      text += "Adding unit of " + quote.size + " sq. ft. "
     end
     if quote.remodel
-      text += "Remodel of " + quote.location + " of " + size.to_s + " sq. ft. "
+      text += "Remodel of " + quote.location + " of " + quote.size + " sq. ft. "
     end
     if quote.complete_remodel
-      text += "Complete remodel of " + quote.location + " of " + size.to_s + " sq. ft. "
+      text += "Complete remodel of " + quote.location + " of " + quote.size+ " sq. ft. "
     end
     if quote.tenant_improvement
-      text += "Tenate improvements of " + size.to_s + " sq. ft. "
+      text += "Tenate improvements of " + quote.size + " sq. ft. "
     end
     if quote.structural_repair
-      text += "Structual repair of " + size.to_s + " sq. ft. "
+      text += "Structual repair of " + quote.size + " sq. ft. "
     end
     if quote.structural_eng
-      text += "Structural engineering of " + size.to_s + " sq. ft. "
+      text += "Structural engineering of " + quote.size + " sq. ft. "
     end
     if !quote.project_other.nil? && quote.project_other != ""
-      text += quote.project_other + " of " + size.to_s + " sq. ft. "
+      text += quote.project_other + " of " + quote.size + " sq. ft. "
     end
     return text
   end
@@ -223,26 +222,12 @@ class SendQuoteMailer < ApplicationMailer
     return text
   end
 
-  def get_size(size)
-    if size == "<500"
-      return 500
-    elsif size == "500-1000"
-      return 1000
-    elsif size == "1000-1500"
-      return 1500
-    elsif size == "1500-2000"
-      return 2000
-    elsif size == "2000-2500"
-      return 2500
-    elsif size == "2500-3000"
-      return 3000
-    else
-      raise "Size of job is incorrect"
-    end
-  end
-
   def get_line_item_one_price(footage)
-    "$" + (footage * 7).to_i.to_s
+    if footage > 1500
+      return "$" + (footage * 6).to_i.to_s
+    else
+      return "$" + (footage * 7).to_i.to_s
+    end
   end
 
   def arch_set_description(quote)
